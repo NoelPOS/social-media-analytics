@@ -1,0 +1,27 @@
+Scenario,Investment_Type,Cost_Monthly,Cost_Annual,Time_Saved_Hours_Monthly,Revenue_Increase_Monthly,Engagement_Increase_Pct,Follower_Growth_Monthly,Other_Benefits,Risk_Level
+Scheduling_Tool,Software,49,588,6,0,0,0,Consistency and planning,Low
+Analytics_Platform,Software,199,2388,10,2500,8,250,Better insights,Low
+Design_Tool_Pro,Software,29,348,8,0,5,100,Professional appearance,Low
+Social_Listening,Software,399,4788,15,4000,12,400,Competitive intelligence,Medium
+Video_Editor,Software,79,948,12,3500,15,350,Higher quality content,Low
+Influencer_Platform,Software,299,3588,5,8000,0,800,Partnership management,Medium
+Part_Time_Manager,Hiring,3000,36000,80,15000,25,1200,Full strategy ownership,Medium
+Content_Creator,Hiring,2500,30000,60,8000,18,600,Consistent quality,Medium
+Video_Specialist,Hiring,3500,42000,40,12000,30,800,Premium video content,Medium
+Community_Manager,Hiring,2800,33600,50,6000,20,500,Better engagement,Low
+Strategy_Consultant,Hiring,5000,60000,20,25000,35,1500,Expert guidance,High
+Professional_Photos,Content,800,9600,0,4500,12,300,Brand perception,Low
+Stock_Photo_Subscription,Content,99,1188,5,1200,3,50,More content variety,Low
+UGC_Campaign,Content,1500,18000,0,8000,25,600,Authentic content,Medium
+Brand_Video_Production,Content,3000,36000,0,15000,40,1000,Premium storytelling,High
+Podcast_Production,Content,2000,24000,0,10000,15,400,Thought leadership,High
+Analytics_Course,Training,500,500,0,4000,15,200,Better decision making,Low
+Content_Strategy_Workshop,Training,1200,1200,0,6000,20,350,Improved planning,Low
+Certification_Program,Training,2500,2500,0,10000,25,500,Professional credibility,Medium
+Conference_Attendance,Training,1800,1800,0,5000,10,150,Industry connections,Medium
+Coaching_Program,Training,5000,60000,0,20000,30,800,Personalized growth,High
+Micro_Influencer_Campaign,Advertising,2000,24000,0,12000,15,800,Authentic reach,Medium
+Paid_Social_Ads,Advertising,3000,36000,0,18000,0,400,Targeted reach,Medium
+Sponsored_Content,Advertising,4000,48000,0,22000,18,600,Brand awareness,High
+Retargeting_Campaign,Advertising,1500,18000,0,9000,8,200,Conversion focused,Low
+Display_Advertising,Advertising,2500,30000,0,14000,5,300,Brand visibility,Medium

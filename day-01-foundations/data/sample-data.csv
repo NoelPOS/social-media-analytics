@@ -1,0 +1,411 @@
+# Sample Social Media Data for Day 1 Practice
+
+## 📊 Practice Datasets
+
+**Course:** Social Media Analytics - Day 1  
+**Purpose:** Sample data for hands-on exercises and calculations  
+**Format:** CSV-compatible data
+
+---
+
+## Dataset 1: Instagram Account - "Fitness Journey" (@fitlifejourney)
+
+### Account Overview
+- Account Type: Fitness Influencer
+- Followers: 25,000
+- Following: 450
+- Posts: 320
+- Date Range: January 2026
+
+### Post Performance Data (Last 30 Posts)
+
+```csv
+Post_ID,Date,Time,Type,Caption_Length,Hashtags,Likes,Comments,Shares,Saves,Reach,Impressions
+1,2026-01-03,07:00,Photo,150,10,850,45,12,89,12000,18500
+2,2026-01-03,19:00,Reel,80,8,2100,234,67,456,25000,42000
+3,2026-01-04,08:00,Carousel,200,12,980,98,34,178,14000,21000
+4,2026-01-05,07:30,Photo,120,10,450,23,8,34,8000,11500
+5,2026-01-06,18:00,Video,100,7,1200,156,45,234,15000,28000
+6,2026-01-07,07:00,Photo,180,15,720,56,15,92,10500,15800
+7,2026-01-08,19:30,Reel,60,6,2450,287,89,523,28000,48000
+8,2026-01-09,08:30,Carousel,220,11,1050,112,28,198,16000,24500
+9,2026-01-10,07:00,Photo,140,9,680,41,11,67,9800,14200
+10,2026-01-11,18:30,Reel,90,8,1890,201,56,389,22000,38500
+11,2026-01-12,07:30,Photo,160,12,790,67,18,103,11200,16800
+12,2026-01-13,19:00,Video,110,10,1450,178,42,267,18000,31000
+13,2026-01-14,08:00,Carousel,190,13,920,89,25,156,13500,20200
+14,2026-01-15,07:00,Photo,130,8,580,34,9,45,8500,12300
+15,2026-01-16,18:00,Reel,70,7,2280,256,78,478,26000,44500
+16,2026-01-17,07:30,Photo,170,14,810,59,16,87,11000,16500
+17,2026-01-18,19:30,Video,120,9,1560,189,48,298,19000,33000
+18,2026-01-19,08:30,Carousel,210,12,1010,105,31,187,15000,23000
+19,2026-01-20,07:00,Photo,145,10,650,38,10,58,9200,13800
+20,2026-01-21,18:30,Reel,85,8,2350,278,85,512,27000,46000
+21,2026-01-22,07:30,Photo,155,11,760,52,14,79,10800,15900
+22,2026-01-23,19:00,Video,115,10,1380,167,40,245,17500,30500
+23,2026-01-24,08:00,Carousel,195,13,950,95,27,167,14200,21500
+24,2026-01-25,07:00,Photo,135,9,610,36,9,51,8900,13100
+25,2026-01-26,18:00,Reel,75,7,2180,245,72,467,25500,43500
+26,2026-01-27,07:30,Photo,165,13,830,61,17,94,11500,17200
+27,2026-01-28,19:30,Video,125,10,1490,182,46,278,18500,32000
+28,2026-01-29,08:30,Carousel,205,12,990,102,29,176,14800,22500
+29,2026-01-30,07:00,Photo,140,10,670,40,11,62,9500,14000
+30,2026-01-31,18:30,Reel,80,8,2420,289,88,534,28500,48500
+```
+
+### Audience Demographics
+- Age 18-24: 35%
+- Age 25-34: 45%
+- Age 35-44: 15%
+- Age 45+: 5%
+- Gender: 60% Female, 40% Male
+- Top Locations: Los Angeles (18%), New York (12%), Miami (8%), Chicago (7%), Austin (6%)
+
+### Audience Activity
+- Monday: 3,200 active followers
+- Tuesday: 4,100 active followers
+- Wednesday: 4,500 active followers
+- Thursday: 4,800 active followers
+- Friday: 5,200 active followers
+- Saturday: 6,100 active followers
+- Sunday: 5,800 active followers
+
+**Peak Hours:** 7-9 AM, 6-8 PM EST
+
+---
+
+## Dataset 2: Facebook Business Page - "The Green Cafe"
+
+### Account Overview
+- Business Type: Local Restaurant
+- Page Likes: 8,500
+- Followers: 9,200
+- Date Range: December 2025 - January 2026
+
+### Monthly Metrics
+
+```csv
+Month,Year,Followers,New_Likes,Unlikes,Page_Views,Post_Reach,Post_Engagement,Link_Clicks
+Dec,2025,8100,320,85,2400,45000,1850,340
+Jan,2026,9200,1150,50,3100,62000,2780,520
+```
+
+### Post Performance (Sample 15 Posts)
+
+```csv
+Post_ID,Date,Type,Message_Length,Has_Link,Likes,Comments,Shares,Reach,Impressions,Link_Clicks
+1,2026-01-05,Photo,80,No,145,23,12,3200,4500,0
+2,2026-01-06,Video,120,Yes,287,56,34,5800,9200,67
+3,2026-01-08,Link,150,Yes,98,15,8,2100,3200,45
+4,2026-01-10,Photo,60,No,234,41,28,4200,6300,0
+5,2026-01-12,Video,100,No,312,67,45,6100,10200,0
+6,2026-01-14,Photo,90,Yes,178,28,15,3500,5100,38
+7,2026-01-16,Video,110,Yes,298,72,52,6800,11500,89
+8,2026-01-18,Link,140,Yes,112,18,9,2400,3600,52
+9,2026-01-20,Photo,70,No,201,35,22,3900,5800,0
+10,2026-01-22,Video,130,No,345,82,58,7200,12100,0
+11,2026-01-24,Photo,85,Yes,189,31,18,3700,5400,42
+12,2026-01-26,Video,115,Yes,323,76,48,6900,11800,95
+13,2026-01-28,Link,160,Yes,125,21,11,2600,3900,58
+14,2026-01-30,Photo,75,No,212,38,25,4100,6100,0
+15,2026-01-31,Video,105,No,356,89,61,7500,12800,0
+```
+
+### Audience Demographics
+- Age 18-24: 15%
+- Age 25-34: 35%
+- Age 35-44: 30%
+- Age 45-54: 15%
+- Age 55+: 5%
+- Gender: 55% Female, 45% Male
+- Top Cities: Austin, TX (local business)
+
+---
+
+## Dataset 3: Twitter Account - "Tech News Daily" (@technewsdaily)
+
+### Account Overview
+- Account Type: News/Media
+- Followers: 45,000
+- Following: 1,200
+- Total Tweets: 12,500
+- Date Range: January 2026
+
+### Tweet Performance (Sample 20 Tweets)
+
+```csv
+Tweet_ID,Date,Time,Tweet_Length,Has_Media,Has_Link,Has_Hashtags,Impressions,Engagements,Likes,Retweets,Replies,Link_Clicks
+1,2026-01-02,09:00,180,Yes,Yes,Yes,8500,425,312,89,24,78
+2,2026-01-02,14:00,240,No,Yes,Yes,3200,128,89,23,16,45
+3,2026-01-03,10:00,200,Yes,Yes,No,12000,720,534,145,41,156
+4,2026-01-03,15:00,150,No,Yes,Yes,2800,112,76,21,15,38
+5,2026-01-04,09:30,220,Yes,Yes,Yes,9500,570,423,112,35,98
+6,2026-01-04,16:00,190,No,No,Yes,1900,76,52,15,9,0
+7,2026-01-05,08:00,210,Yes,Yes,Yes,11000,660,487,134,39,142
+8,2026-01-05,13:00,170,No,Yes,No,3500,140,98,28,14,52
+9,2026-01-06,10:30,195,Yes,Yes,Yes,9800,588,435,118,35,125
+10,2026-01-06,17:00,160,No,Yes,Yes,2600,104,71,19,14,42
+11,2026-01-07,09:00,230,Yes,Yes,Yes,10500,630,467,128,35,134
+12,2026-01-07,14:30,180,No,No,Yes,2100,84,58,17,9,0
+13,2026-01-08,08:30,205,Yes,Yes,No,13500,810,601,167,42,178
+14,2026-01-08,15:00,175,No,Yes,Yes,3100,124,86,23,15,48
+15,2026-01-09,10:00,215,Yes,Yes,Yes,10200,612,453,123,36,145
+16,2026-01-09,16:30,165,No,Yes,Yes,2700,108,74,20,14,45
+17,2026-01-10,09:30,225,Yes,Yes,Yes,11500,690,512,141,37,156
+18,2026-01-10,13:30,185,No,No,Yes,2400,96,65,18,13,0
+19,2026-01-11,08:00,200,Yes,Yes,Yes,12500,750,556,153,41,167
+20,2026-01-11,14:00,170,No,Yes,No,3300,132,92,25,15,54
+```
+
+### Follower Growth
+```csv
+Date,Followers,New_Followers,Unfollowers,Net_Growth
+2026-01-01,44200,0,0,0
+2026-01-08,44650,520,70,450
+2026-01-15,44980,410,80,330
+2026-01-22,45230,340,90,250
+2026-01-31,45450,310,90,220
+```
+
+---
+
+## Dataset 4: LinkedIn Company Page - "InnovateTech Solutions"
+
+### Account Overview
+- Company Size: Mid-sized (200-500 employees)
+- Industry: Technology
+- Followers: 12,500
+- Employees on LinkedIn: 380
+- Date Range: January 2026
+
+### Post Performance
+
+```csv
+Post_ID,Date,Type,Content_Category,Impressions,Clicks,Reactions,Comments,Shares,Engagement_Rate
+1,2026-01-04,Article,Thought Leadership,3200,156,89,23,12,8.75%
+2,2026-01-06,Image,Company Culture,2100,87,134,18,8,11.81%
+3,2026-01-09,Video,Product Update,4500,234,201,45,28,11.29%
+4,2026-01-11,Link,Industry News,1800,112,67,12,6,12.78%
+5,2026-01-13,Image,Employee Spotlight,2400,98,156,34,15,12.71%
+6,2026-01-16,Article,How-to Guide,3500,189,112,28,18,9.91%
+7,2026-01-18,Video,Customer Testimonial,4200,245,187,52,31,12.57%
+8,2026-01-20,Image,Event Announcement,2200,123,145,21,11,15.23%
+9,2026-01-23,Link,Case Study,2800,167,98,18,9,11.50%
+10,2026-01-25,Image,Milestone Celebration,2600,134,178,38,19,14.42%
+11,2026-01-27,Article,Industry Insights,3800,198,123,31,21,9.84%
+12,2026-01-30,Video,Behind the Scenes,4600,267,212,56,34,12.26%
+```
+
+### Audience Demographics
+- Job Functions: IT (35%), Engineering (25%), Business Development (15%), Marketing (12%), HR (8%), Other (5%)
+- Seniority: Entry (20%), Mid-level (35%), Senior (25%), Manager (12%), Director (5%), VP+ (3%)
+- Industries: Technology (45%), Finance (15%), Healthcare (12%), Manufacturing (10%), Other (18%)
+- Locations: United States (60%), Canada (15%), UK (10%), India (8%), Other (7%)
+
+---
+
+## Dataset 5: Competitor Comparison Data
+
+### Three Competing Coffee Shops (Instagram)
+
+```csv
+Brand,Followers,Avg_Likes,Avg_Comments,Avg_Saves,Posts_Per_Week,Engagement_Rate,Primary_Content
+Coffee Haven,15000,450,45,67,7,3.75%,Product photos
+Bean & Brew,22000,680,72,98,5,3.86%,Lifestyle
+Daily Grind,18500,520,58,82,6,3.57%,Behind-scenes
+```
+
+---
+
+## Dataset 6: Campaign Performance Data
+
+### Email Newsletter Promotion (Multi-Platform)
+
+```csv
+Platform,Impressions,Reach,Clicks,Click_Through_Rate,Sign_ups,Conversion_Rate,Cost,CPC,CPA
+Facebook,45000,32000,1200,2.67%,156,13.0%,$300,$0.25,$1.92
+Instagram,38000,28000,980,2.58%,142,14.5%,$280,$0.29,$1.97
+Twitter,52000,41000,1450,2.79%,178,12.3%,$320,$0.22,$1.80
+LinkedIn,18000,15000,720,4.00%,98,13.6%,$250,$0.35,$2.55
+```
+
+### Total Campaign Results
+- Total Spend: $1,150
+- Total Clicks: 4,350
+- Total Sign-ups: 574
+- Average CPC: $0.26
+- Average CPA: $2.00
+- Overall Conversion Rate: 13.2%
+
+---
+
+## Dataset 7: Engagement by Time of Day
+
+### Instagram Posts - Engagement by Hour (Average across 100 posts)
+
+```csv
+Hour,Posts_Published,Avg_Likes,Avg_Comments,Avg_Shares,Avg_Saves,Avg_Reach,Avg_Engagement_Rate
+00:00,2,345,28,8,42,4200,10.12%
+01:00,1,298,21,6,35,3800,9.47%
+02:00,0,0,0,0,0,0,0%
+03:00,0,0,0,0,0,0,0%
+04:00,0,0,0,0,0,0,0%
+05:00,1,412,31,9,48,5100,9.80%
+06:00,3,568,45,13,67,6800,10.19%
+07:00,8,723,58,17,89,9200,10.62%
+08:00,12,812,67,19,98,10500,10.93%
+09:00,8,756,61,18,91,9800,10.47%
+10:00,6,689,54,16,78,8900,10.30%
+11:00,7,734,59,17,84,9400,10.49%
+12:00,5,645,51,15,72,8200,10.40%
+13:00,4,598,47,14,65,7600,10.32%
+14:00,3,567,44,13,61,7200,10.28%
+15:00,4,612,49,14,68,7800,10.42%
+16:00,5,678,54,16,76,8600,10.51%
+17:00,6,734,59,17,83,9300,10.58%
+18:00,9,845,69,20,102,10800,11.00%
+19:00,11,923,76,22,115,11900,11.18%
+20:00,7,812,66,19,98,10500,10.90%
+21:00,5,723,58,17,87,9400,10.69%
+22:00,3,634,50,15,71,8100,10.49%
+23:00,2,556,44,13,62,7100,10.35%
+```
+
+**Key Insight:** Peak engagement 6-9 PM, with morning spike at 7-8 AM.
+
+---
+
+## Dataset 8: Content Type Performance
+
+### 6-Month Analysis Across Platforms
+
+```csv
+Content_Type,Platform,Total_Posts,Avg_Reach,Avg_Engagement,Avg_Eng_Rate,Avg_Shares,Avg_Saves
+Photo,Instagram,120,8500,645,7.59%,18,76
+Video,Instagram,85,15200,1234,8.12%,42,187
+Carousel,Instagram,45,11800,923,7.82%,28,142
+Reel,Instagram,60,24500,2156,8.80%,67,398
+Story,Instagram,240,6200,412,6.65%,12,0
+Photo,Facebook,95,3200,234,7.31%,15,0
+Video,Facebook,68,5800,456,7.86%,34,0
+Link,Facebook,42,2100,145,6.90%,9,0
+Text,Twitter,180,2800,112,4.00%,23,0
+Image,Twitter,95,4200,187,4.45%,34,0
+Video,Twitter,35,6500,298,4.58%,52,0
+Article,LinkedIn,48,3200,198,6.19%,18,0
+Image,LinkedIn,52,2600,167,6.42%,15,0
+Video,LinkedIn,28,4200,287,6.83%,28,0
+```
+
+**Key Insights:**
+- Reels have highest engagement on Instagram
+- Videos outperform photos on most platforms
+- LinkedIn prefers professional content
+- Twitter engagement generally lower but reaches more people
+
+---
+
+## Practice Exercise Questions for Datasets
+
+### Using Dataset 1 (Fitness Journey Instagram):
+
+1. **Calculate engagement rate for Post #2**
+2. **Which content type performs best overall?**
+3. **What's the average engagement rate for Reels vs. Photos?**
+4. **Identify the best day to post**
+5. **Calculate follower growth if they gained 2,500 followers in January**
+
+### Using Dataset 2 (Green Cafe Facebook):
+
+6. **Calculate the page's engagement rate for January**
+7. **Compare video vs. photo performance**
+8. **What's the click-through rate on posts with links?**
+9. **Calculate monthly follower growth rate**
+10. **Which post type should they post more of? Why?**
+
+### Using Dataset 3 (Tech News Twitter):
+
+11. **Calculate average engagement rate across all tweets**
+12. **Do tweets with media perform better? By how much?**
+13. **What's the optimal time to tweet based on this data?**
+14. **Calculate the follower growth rate for January**
+15. **What's the relationship between hashtags and performance?**
+
+### Using Dataset 4 (InnovateTech LinkedIn):
+
+16. **Which content category has the highest engagement rate?**
+17. **Calculate average engagement rate for videos vs. articles**
+18. **What percentage of the audience is in senior positions?**
+19. **How does video content perform compared to images?**
+20. **What posting frequency would you recommend?**
+
+### Using Dataset 5 (Coffee Shop Comparison):
+
+21. **Rank the three coffee shops by engagement rate**
+22. **Which brand has the most efficient posting strategy?**
+23. **Calculate engagement per post for each brand**
+24. **Which brand would you benchmark against? Why?**
+
+### Using Dataset 6 (Campaign Performance):
+
+25. **Which platform had the best ROI?**
+26. **Calculate overall campaign ROI**
+27. **Which platform should receive more budget? Why?**
+28. **What's the blended conversion rate?**
+29. **Calculate revenue if each sign-up is worth $50**
+
+### Using Dataset 7 (Time Analysis):
+
+30. **What are the top 3 posting times?**
+31. **Calculate the difference in engagement between best and worst hours**
+32. **Should they post at 3 AM? Why or why not?**
+33. **What percentage of posts are published during peak times?**
+
+### Using Dataset 8 (Content Type):
+
+34. **Which content type should Instagram prioritize?**
+35. **Calculate the performance lift of Reels vs. Photos**
+36. **Should they stop posting certain content types? Which?**
+37. **What's the ROI if Reels take 3x longer to create?**
+
+---
+
+## Answer Key Available
+
+Check with instructor for answer key to verify your calculations!
+
+---
+
+## Additional Practice Data
+
+### Dataset 9: Social Media ROI Calculator (Template)
+
+```csv
+Metric,Value,Formula,Notes
+Ad Spend,$1000,,Total investment
+Impressions,50000,,Total reach
+Clicks,1500,Clicks/Impressions × 100 = CTR,People who clicked
+CTR,3%,,Click-through rate
+Website Visits,1350,Visits/Clicks × 100,Site traffic
+Conversion Rate,10%,Conversions/Visits × 100,Purchase rate
+Conversions,135,,"Purchases, sign-ups, etc"
+Revenue Per Conversion,$75,,Average order value
+Total Revenue,$10125,Conversions × Revenue,Total generated
+ROAS,10.13,Revenue/Spend,Return on ad spend
+ROI,913%,(Revenue-Spend)/Spend × 100,Return on investment
+CPC,$0.67,Spend/Clicks,Cost per click
+CPA,$7.41,Spend/Conversions,Cost per acquisition
+```
+
+---
+
+**All datasets are fictional but based on realistic industry averages and patterns.**
+
+**Use these datasets to practice:**
+- Calculating metrics
+- Identifying patterns
+- Making recommendations
+- Comparing performance
+- Creating reports
+
+**Happy analyzing! 📊**
