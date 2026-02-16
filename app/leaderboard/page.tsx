@@ -109,21 +109,21 @@ export default function LeaderboardPage() {
   }, [activeTab]);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white p-6 md:p-12 font-sans selection:bg-violet-500/30">
+    <div className="min-h-screen brand-bg text-gray-900 p-6 md:p-12 font-sans selection:bg-blue-500/30">
         <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
             {/* Header */}
             <div className="flex items-center gap-4">
                 <Link 
-                    href="/dashboard"
-                    className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors"
+                    href="/admin"
+                    className="w-10 h-10 rounded-xl bg-white flex items-center justify-center hover:bg-white/80 shadow-sm border border-gray-200 transition-colors text-gray-500"
                 >
                     <ChevronLeft className="w-5 h-5" />
                 </Link>
                 <div>
-                    <h1 className="text-3xl font-black bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
+                    <h1 className="text-3xl font-black text-gray-900">
                         Leaderboard
                     </h1>
-                    <p className="text-white/40 font-medium">See how you stack up against your peers</p>
+                    <p className="text-gray-500 font-medium">See how you stack up against your peers</p>
                 </div>
             </div>
 
@@ -134,8 +134,8 @@ export default function LeaderboardPage() {
                     className={cn(
                         "px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition-all duration-200",
                         activeTab === "overall"
-                            ? "bg-violet-600 text-white shadow-lg shadow-violet-600/25"
-                            : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white"
+                            ? "bg-blue-600 text-white shadow-lg shadow-blue-600/25"
+                            : "bg-white text-gray-500 border border-gray-200 hover:bg-gray-50 hover:text-gray-900"
                     )}
                 >
                     Overall
@@ -147,8 +147,8 @@ export default function LeaderboardPage() {
                         className={cn(
                             "px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition-all duration-200",
                             activeTab === quiz.id
-                                ? "bg-violet-600 text-white shadow-lg shadow-violet-600/25"
-                                : "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white"
+                                ? "bg-blue-600 text-white shadow-lg shadow-blue-600/25"
+                                : "bg-white text-gray-500 border border-gray-200 hover:bg-gray-50 hover:text-gray-900"
                         )}
                     >
                         Day {quiz.day} {quiz.type === "morning" ? "AM" : "PM"}
@@ -157,28 +157,28 @@ export default function LeaderboardPage() {
             </div>
 
             {/* Leaderboard Table */}
-            <Card className="bg-[#111] border-white/5 overflow-hidden">
+            <Card className="bg-white border-gray-200 overflow-hidden shadow-sm">
                 {loading ? (
                     <div className="p-8 space-y-4">
                         {[1, 2, 3, 4, 5].map((i) => (
-                            <div key={i} className="h-16 rounded-xl bg-white/5 animate-pulse" />
+                            <div key={i} className="h-16 rounded-xl bg-gray-100 animate-pulse" />
                         ))}
                     </div>
                 ) : (
                     <div className="overflow-x-auto">
                         <table className="w-full text-left">
-                            <thead className="bg-white/[0.02] border-b border-white/5">
+                            <thead className="bg-gray-50 border-b border-gray-200">
                                 <tr>
-                                    <th className="p-4 text-center w-16 text-white/40 font-medium">Rank</th>
-                                    <th className="p-4 text-white/40 font-medium">Student</th>
-                                    <th className="p-4 text-right text-white/40 font-medium">Score</th>
-                                    <th className="p-4 text-right text-white/40 font-medium hidden sm:table-cell">Correct</th>
+                                    <th className="p-4 text-center w-16 text-gray-500 font-medium">Rank</th>
+                                    <th className="p-4 text-gray-500 font-medium">Student</th>
+                                    <th className="p-4 text-right text-gray-500 font-medium">Score</th>
+                                    <th className="p-4 text-right text-gray-500 font-medium hidden sm:table-cell">Correct</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-white/5">
+                            <tbody className="divide-y divide-gray-100">
                                 {leaderboardData.map((entry, index) => {
                                     const rank = index + 1;
-                                    let rankColor = "text-white/40";
+                                    let rankColor = "text-gray-400";
                                     let rankIcon = null;
 
                                     if (rank === 1) {
@@ -193,30 +193,30 @@ export default function LeaderboardPage() {
                                     }
 
                                     return (
-                                        <tr key={entry.student.uid} className="hover:bg-white/[0.02] transition-colors group">
+                                        <tr key={entry.student.uid} className="hover:bg-gray-50 transition-colors group">
                                             <td className={`p-4 text-center font-bold text-lg ${rankColor}`}>
                                                 {rankIcon || rank}
                                             </td>
                                             <td className="p-4">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500/20 to-purple-500/20 border border-white/5 flex items-center justify-center font-bold text-violet-300">
+                                                    <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center font-bold text-blue-600">
                                                         {entry.student.name?.[0]?.toUpperCase()}
                                                     </div>
                                                     <div>
-                                                        <p className="font-semibold text-white group-hover:text-violet-300 transition-colors">
+                                                        <p className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
                                                             {entry.student.name}
                                                         </p>
-                                                        <p className="text-xs text-white/30 hidden sm:block">
+                                                        <p className="text-xs text-gray-500 hidden sm:block">
                                                             {entry.student.favoriteSocialMedia || "Student"}
                                                         </p>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td className="p-4 text-right">
-                                                <span className="font-mono font-bold text-lg text-white">
+                                                <span className="font-mono font-bold text-lg text-gray-900">
                                                     {entry.score}
                                                 </span>
-                                                <span className="text-sm text-white/40 ml-1">
+                                                <span className="text-sm text-gray-500 ml-1">
                                                     / {entry.totalPossible}
                                                 </span>
                                             </td>

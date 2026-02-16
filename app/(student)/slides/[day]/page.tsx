@@ -11,13 +11,15 @@ import {
   ArrowLeft,
   Grid3X3,
   X,
+  FileText,
+  Keyboard,
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 
 // Adjust these to match the actual number of slides per day
 const SLIDES_PER_DAY: Record<string, number> = {
-  day1: 37,
+  day1: 70,
   day2: 20,
 };
 
@@ -91,42 +93,42 @@ export default function SlidesPage() {
     <div
       ref={containerRef}
       className={cn(
-        "flex flex-col bg-[#0a0a0f]",
-        fullscreen ? "fixed inset-0 z-50" : "min-h-screen"
+        "flex flex-col transition-colors duration-300",
+        fullscreen ? "fixed inset-0 z-50 bg-[#0a0a0f]" : "min-h-screen bg-slate-50"
       )}
     >
       {/* Top bar */}
       {!fullscreen && (
-        <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-black/30 backdrop-blur-sm">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-white/80 backdrop-blur-sm">
           <button
             onClick={() => router.back()}
-            className="flex items-center gap-2 text-white/50 hover:text-white transition-colors text-sm"
+            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
           >
             <ArrowLeft className="w-4 h-4" />
             <span className="hidden sm:inline">Back</span>
           </button>
 
           <div className="flex items-center gap-3">
-            <span className="text-white/40 text-xs font-medium uppercase tracking-widest">
+            <span className="text-muted-foreground/60 text-xs font-medium uppercase tracking-widest">
               {slideLabel}
             </span>
-            <span className="text-white/20">·</span>
-            <span className="text-white font-semibold text-sm">
-              {current} <span className="text-white/40">/ {totalSlides}</span>
+            <span className="text-muted-foreground/30">·</span>
+            <span className="text-foreground font-semibold text-sm">
+              {current} <span className="text-muted-foreground/60">/ {totalSlides}</span>
             </span>
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowGrid(!showGrid)}
-              className="p-2 rounded-lg text-white/40 hover:text-white hover:bg-white/10 transition-all"
+              className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-black/5 transition-all"
               title="Grid view (G)"
             >
               <Grid3X3 className="w-4 h-4" />
             </button>
             <button
               onClick={toggleFullscreen}
-              className="p-2 rounded-lg text-white/40 hover:text-white hover:bg-white/10 transition-all"
+              className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-black/5 transition-all"
               title="Fullscreen (F)"
             >
               <Maximize2 className="w-4 h-4" />
@@ -152,7 +154,12 @@ export default function SlidesPage() {
       )}
 
       {/* Slide viewer */}
-      <div className="flex-1 flex items-center justify-center relative px-12 md:px-20 py-4">
+      <div 
+        className={cn(
+          "flex-1 flex items-center justify-center relative transition-all duration-300",
+          fullscreen ? "p-0" : "px-4 md:px-12 py-4"
+        )}
+      >
         {/* Prev button */}
         <button
           onClick={goPrev}
@@ -160,8 +167,10 @@ export default function SlidesPage() {
           className={cn(
             "absolute left-2 md:left-4 z-10 p-2.5 rounded-xl transition-all duration-200",
             current === 1
-              ? "text-white/10 cursor-not-allowed"
-              : "text-white/50 hover:text-white hover:bg-white/10 active:scale-95"
+              ? (fullscreen ? "text-white/10" : "text-gray-300") + " cursor-not-allowed"
+              : fullscreen 
+                ? "text-white/50 hover:text-white hover:bg-white/10 active:scale-95"
+                : "text-gray-400 hover:text-gray-900 hover:bg-black/5 active:scale-95"
           )}
           title="Previous slide (←)"
         >
@@ -171,16 +180,21 @@ export default function SlidesPage() {
         {/* Slide image */}
         <div
           className={cn(
-            "relative w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl shadow-black/60 transition-all duration-300",
-            "border border-white/5"
+            "relative overflow-hidden transition-all duration-300",
+            fullscreen 
+              ? "w-full h-full" 
+              : "w-full max-w-5xl rounded-2xl shadow-2xl shadow-black/20 border border-gray-200 bg-white"
           )}
-          style={{ aspectRatio: "16/9" }}
+          style={fullscreen ? {} : { aspectRatio: "16/9" }}
         >
           {imageError ? (
-            <div className="w-full h-full flex flex-col items-center justify-center bg-white/[0.02] text-white/20 gap-3">
-              <div className="text-6xl">📄</div>
+            <div className={cn(
+              "w-full h-full flex flex-col items-center justify-center gap-3",
+              fullscreen ? "bg-white/[0.02] text-white/20" : "bg-gray-50 text-gray-400"
+            )}>
+              <FileText className="w-16 h-16 opacity-20" />
               <p className="text-sm">Slide {current} not found</p>
-              <p className="text-xs text-white/10">
+              <p className="text-xs opacity-50">
                 Add images to /public/slides/{day}/{current}.png
               </p>
             </div>
@@ -193,7 +207,7 @@ export default function SlidesPage() {
               className="object-contain slide-enter"
               onError={() => setImageError(true)}
               priority
-              sizes="(max-width: 768px) 100vw, 80vw"
+              sizes={fullscreen ? "100vw" : "(max-width: 768px) 100vw, 80vw"}
             />
           )}
         </div>
@@ -205,8 +219,10 @@ export default function SlidesPage() {
           className={cn(
             "absolute right-2 md:right-4 z-10 p-2.5 rounded-xl transition-all duration-200",
             current === totalSlides
-              ? "text-white/10 cursor-not-allowed"
-              : "text-white/50 hover:text-white hover:bg-white/10 active:scale-95"
+              ? (fullscreen ? "text-white/10" : "text-gray-300") + " cursor-not-allowed"
+              : fullscreen 
+                ? "text-white/50 hover:text-white hover:bg-white/10 active:scale-95"
+                : "text-gray-400 hover:text-gray-900 hover:bg-black/5 active:scale-95"
           )}
           title="Next slide (→)"
         >
@@ -233,8 +249,8 @@ export default function SlidesPage() {
                 className={cn(
                   "transition-all duration-200 rounded-full",
                   n === current
-                    ? "w-4 h-2 bg-violet-500"
-                    : "w-2 h-2 bg-white/15 hover:bg-white/30"
+                    ? "w-4 h-2 bg-blue-500"
+                    : "w-2 h-2 bg-gray-200 hover:bg-gray-400"
                 )}
               />
             ))}
@@ -243,8 +259,11 @@ export default function SlidesPage() {
 
         {/* Keyboard hints */}
         {!fullscreen && (
-          <p className="text-center text-white/15 text-xs">
-            ← → Arrow keys to navigate · F to fullscreen · G for grid
+          <p className="text-center text-muted-foreground/40 text-xs flex items-center justify-center gap-4">
+            <span className="flex items-center gap-1"><Keyboard className="w-3 h-3" /> Navigation</span>
+            <span><span className="font-mono bg-white/10 px-1 rounded">←</span> <span className="font-mono bg-white/10 px-1 rounded">→</span> to move</span>
+            <span><span className="font-mono bg-white/10 px-1 rounded">F</span> fullscreen</span>
+            <span><span className="font-mono bg-white/10 px-1 rounded">G</span> grid</span>
           </p>
         )}
       </div>
@@ -273,7 +292,7 @@ export default function SlidesPage() {
                 className={cn(
                   "relative rounded-lg overflow-hidden border-2 transition-all duration-200 aspect-video group",
                   n === current
-                    ? "border-violet-500 shadow-lg shadow-violet-500/30"
+                    ? "border-blue-500 shadow-lg shadow-blue-500/30"
                     : "border-white/10 hover:border-white/30"
                 )}
               >
@@ -287,7 +306,7 @@ export default function SlidesPage() {
                 />
                 <div className={cn(
                   "absolute inset-0 flex items-center justify-center bg-black/50",
-                  n === current ? "bg-violet-500/20" : "opacity-0 group-hover:opacity-100 transition-opacity"
+                  n === current ? "bg-blue-500/20" : "opacity-0 group-hover:opacity-100 transition-opacity"
                 )}>
                   <span className="text-white text-xs font-bold">{n}</span>
                 </div>

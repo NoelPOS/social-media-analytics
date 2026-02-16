@@ -48,9 +48,9 @@ const config: Config = {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "brand-gradient": "linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)",
+        "brand-gradient": "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
         "brand-gradient-2": "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-        "card-gradient": "linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)",
+        "card-gradient": "linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)",
       },
       animation: {
         "slide-in": "slideIn 0.3s ease-out",

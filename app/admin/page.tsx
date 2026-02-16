@@ -38,6 +38,11 @@ import {
   Search,
   BookOpen,
   ArrowRight,
+  AlertTriangle,
+  BarChart3,
+  Sun,
+  Moon,
+  Disc,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
@@ -102,7 +107,7 @@ export default function AdminDashboard() {
   const handleSeed = async () => {
     if (
       !confirm(
-        "⚠️ WARNING: This will DELETE ALL EXISTING QUIZZES AND ATTEMPTS and reset them to the default state.\n\nAre you sure you want to continue?"
+        "WARNING: This will DELETE ALL EXISTING QUIZZES AND ATTEMPTS and reset them to the default state.\n\nAre you sure you want to continue?"
       )
     )
       return;
@@ -125,7 +130,7 @@ export default function AdminDashboard() {
   const handleDeleteStudent = async (userId: string, userName: string) => {
     if (
       !confirm(
-        `⚠️ DANGER: Delete student "${userName}"?\n\nThis will permanently delete their profile, quiz history, and attendance. This cannot be undone.`
+        `DANGER: Delete student "${userName}"?\n\nThis will permanently delete their profile, quiz history, and attendance. This cannot be undone.`
       )
     )
       return;
@@ -183,17 +188,17 @@ export default function AdminDashboard() {
       {/* Header */}
       <div className="flex items-start justify-between flex-wrap gap-4">
         <div>
-          <h1 className="text-3xl font-black text-white">Admin Dashboard</h1>
-          <p className="text-white/40 mt-1">Manage quizzes and monitor student progress</p>
+          <h1 className="text-3xl font-black text-gray-900">Admin Dashboard</h1>
+          <p className="text-gray-500 mt-1">Manage quizzes and monitor student progress</p>
         </div>
         <div className="flex gap-3 flex-wrap">
           <Link href="/leaderboard">
-            <Button variant="outline" size="sm" className="gap-2">
+            <Button variant="outline" size="sm" className="gap-2 bg-white border-gray-200 text-gray-700 hover:bg-gray-50 hover:text-gray-900 hover:border-gray-300">
               <Trophy className="w-4 h-4" />
               Leaderboard
             </Button>
           </Link>
-          <Button variant="outline" onClick={load} size="sm">
+          <Button variant="outline" onClick={load} size="sm" className="bg-white border-gray-200 text-gray-700 hover:bg-gray-50 hover:text-gray-900 hover:border-gray-300">
             <RefreshCw className="w-4 h-4" /> Refresh
           </Button>
           <Button onClick={handleSeed} disabled={seeding} variant="default" size="sm">
@@ -213,8 +218,8 @@ export default function AdminDashboard() {
 
       {/* Lecture Slides */}
       <div>
-        <h2 className="text-white font-bold text-base mb-3 flex items-center gap-2">
-          <BookOpen className="w-4 h-4 text-violet-400" />
+        <h2 className="text-gray-900 font-bold text-base mb-3 flex items-center gap-2">
+          <BookOpen className="w-4 h-4 text-blue-600" />
           Lecture Slides
         </h2>
         <div className="grid sm:grid-cols-2 gap-3">
@@ -223,15 +228,15 @@ export default function AdminDashboard() {
             { day: "day2", label: "Day 2", description: "Platform Analytics & Advanced Strategies" },
           ].map(({ day, label, description }) => (
             <Link key={day} href={`/slides/${day}`}>
-              <Card className="p-4 hover:border-violet-500/30 hover:bg-white/[0.06] transition-all duration-200 cursor-pointer group flex items-center gap-4">
-                <div className="w-10 h-10 rounded-xl bg-violet-500/15 border border-violet-500/20 flex items-center justify-center text-lg flex-shrink-0">
-                  📊
+              <Card className="p-4 bg-white border-gray-200 hover:border-blue-300 hover:shadow-md transition-all duration-200 cursor-pointer group flex items-center gap-4">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-lg flex-shrink-0">
+                  <BarChart3 className="w-5 h-5 text-blue-600" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-white font-semibold text-sm">{label}</p>
-                  <p className="text-white/40 text-xs truncate">{description}</p>
+                  <p className="text-gray-900 font-semibold text-sm">{label}</p>
+                  <p className="text-gray-500 text-xs truncate">{description}</p>
                 </div>
-                <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-violet-400 transition-colors flex-shrink-0" />
+                <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-blue-500 transition-colors flex-shrink-0" />
               </Card>
             </Link>
           ))}
@@ -241,19 +246,19 @@ export default function AdminDashboard() {
       {/* Stats cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { icon: Users, label: "Total Students", value: totalStudents, color: "text-blue-400", bg: "from-blue-900/30 to-blue-900/10 border-blue-500/20" },
-          { icon: ClipboardList, label: "Active Quizzes", value: `${activeQuizzes}/${quizzes.length}`, color: "text-violet-400", bg: "from-violet-900/30 to-violet-900/10 border-violet-500/20" },
-          { icon: Trophy, label: "Total Attempts", value: totalAttempts, color: "text-amber-400", bg: "from-amber-900/30 to-amber-900/10 border-amber-500/20" },
-          { icon: TrendingUp, label: "Avg. Score", value: `${avgScore}%`, color: "text-emerald-400", bg: "from-emerald-900/30 to-emerald-900/10 border-emerald-500/20" },
+          { icon: Users, label: "Total Students", value: totalStudents, color: "text-blue-600", bg: "bg-white border-gray-200" },
+          { icon: ClipboardList, label: "Active Quizzes", value: `${activeQuizzes}/${quizzes.length}`, color: "text-purple-600", bg: "bg-white border-gray-200" },
+          { icon: Trophy, label: "Total Attempts", value: totalAttempts, color: "text-amber-600", bg: "bg-white border-gray-200" },
+          { icon: TrendingUp, label: "Avg. Score", value: `${avgScore}%`, color: "text-emerald-600", bg: "bg-white border-gray-200" },
         ].map(({ icon: Icon, label, value, color, bg }) => (
           <div key={label} className={`rounded-2xl p-5 bg-gradient-to-br border ${bg}`}>
             <div className="flex items-center gap-3">
-              <div className={`w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center ${color}`}>
+              <div className={`w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center ${color}`}>
                 <Icon className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-white font-black text-xl leading-none">{value}</p>
-                <p className="text-white/40 text-xs mt-0.5">{label}</p>
+                <p className="text-gray-900 font-black text-xl leading-none">{value}</p>
+                <p className="text-gray-500 text-xs mt-0.5">{label}</p>
               </div>
             </div>
           </div>
@@ -261,15 +266,15 @@ export default function AdminDashboard() {
       </div>
 
       {/* Tab switcher */}
-      <div className="flex gap-1 p-1 rounded-xl bg-white/5 w-fit">
+      <div className="flex gap-1 p-1 rounded-xl bg-gray-100 border border-gray-200 w-fit">
         {(["quizzes", "students", "attendance"] as const).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 capitalize ${
               activeTab === tab
-                ? "bg-violet-500 text-white shadow-lg shadow-violet-500/25"
-                : "text-white/40 hover:text-white"
+                ? "bg-white text-gray-900 shadow-sm"
+                : "text-gray-500 hover:text-gray-900"
             }`}
           >
             {tab === "quizzes" ? `Quizzes (${quizzes.length})` : tab === "students" ? `Students (${totalStudents})` : `Attendance`}
@@ -287,10 +292,10 @@ export default function AdminDashboard() {
               ))}
             </div>
           ) : quizzes.length === 0 ? (
-            <Card className="p-12 text-center">
-              <Database className="w-10 h-10 text-white/10 mx-auto mb-4" />
-              <p className="text-white/40 mb-2">No quizzes in database yet.</p>
-              <p className="text-white/20 text-sm">Click "Seed Quiz Data" to add mock quizzes.</p>
+            <Card className="p-12 text-center bg-white border-dashed border-gray-300 shadow-none">
+              <Database className="w-10 h-10 text-gray-300 mx-auto mb-4" />
+              <p className="text-gray-500 mb-2">No quizzes in database yet.</p>
+              <p className="text-gray-400 text-sm">Click "Seed Quiz Data" to add mock quizzes.</p>
             </Card>
           ) : (
             <div className="grid md:grid-cols-2 gap-4">
@@ -306,21 +311,22 @@ export default function AdminDashboard() {
                     : null;
 
                 return (
-                  <Card key={quiz.id} className={`p-5 border transition-all ${quiz.active ? "border-emerald-500/20 bg-emerald-500/[0.03]" : "border-white/8"}`}>
+                  <Card key={quiz.id} className={`p-5 border transition-all ${quiz.active ? "border-emerald-200 bg-emerald-50" : "bg-white border-gray-200"}`}>
                     <div className="flex items-start justify-between gap-3 mb-3">
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap mb-1">
-                          <Badge variant={quiz.type === "morning" ? "info" : "warning"}>
-                            Day {quiz.day} · {quiz.type === "morning" ? "☀️ Morning" : "🌙 Afternoon"}
+                          <Badge className={`flex items-center gap-1 border-0 ${quiz.type === "morning" ? "bg-amber-100 text-amber-800" : "bg-indigo-100 text-indigo-800"}`}>
+                            {quiz.type === "morning" ? <Sun className="w-3 h-3" /> : <Moon className="w-3 h-3" />}
+                            Day {quiz.day} · {quiz.type === "morning" ? "Morning" : "Afternoon"}
                           </Badge>
                           {quiz.active ? (
-                            <Badge variant="success">● Live</Badge>
+                            <Badge className="bg-emerald-100 text-emerald-800 border-0 flex items-center gap-1"><Disc className="w-2 h-2 animate-pulse fill-current" /> Live</Badge>
                           ) : (
-                            <Badge variant="secondary">Closed</Badge>
+                            <Badge variant="secondary" className="bg-gray-100 text-gray-500 border-gray-200">Closed</Badge>
                           )}
                         </div>
-                        <h3 className="text-white font-semibold text-sm truncate">{quiz.title}</h3>
-                        <p className="text-white/30 text-xs mt-0.5">
+                        <h3 className="text-gray-900 font-semibold text-sm truncate">{quiz.title}</h3>
+                        <p className="text-gray-500 text-xs mt-0.5">
                           {quiz.questions.length} questions · {Math.floor(quiz.timeLimit / 60)} min
                         </p>
                       </div>
@@ -333,15 +339,15 @@ export default function AdminDashboard() {
                         title={quiz.active ? "Click to close quiz" : "Click to open quiz"}
                       >
                         {quiz.active ? (
-                          <ToggleRight className="w-8 h-8 text-emerald-400" />
+                          <ToggleRight className="w-8 h-8 text-emerald-500" />
                         ) : (
-                          <ToggleLeft className="w-8 h-8 text-white/30" />
+                          <ToggleLeft className="w-8 h-8 text-gray-400 hover:text-gray-600 transition-colors" />
                         )}
                       </button>
                     </div>
 
                     {/* Analytics row */}
-                    <div className="flex items-center gap-4 text-xs text-white/40">
+                    <div className="flex items-center gap-4 text-xs text-gray-500">
                       <span className="flex items-center gap-1">
                         <Users className="w-3 h-3" />
                         {uniqueStudents} students attempted
@@ -356,7 +362,7 @@ export default function AdminDashboard() {
 
                     {avgQuizScore !== null && (
                       <div className="mt-2">
-                        <Progress value={avgQuizScore} className="h-1" />
+                        <Progress value={avgQuizScore} className="h-1 bg-gray-100" />
                       </div>
                     )}
                   </Card>
@@ -372,12 +378,12 @@ export default function AdminDashboard() {
         <div className="space-y-4">
           {/* Search */}
           <div className="relative max-w-sm">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
             <Input
               placeholder="Search students..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10"
+              className="pl-10 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400"
             />
           </div>
 
@@ -388,9 +394,9 @@ export default function AdminDashboard() {
               ))}
             </div>
           ) : filteredStudents.length === 0 ? (
-            <Card className="p-12 text-center">
-              <Users className="w-10 h-10 text-white/10 mx-auto mb-4" />
-              <p className="text-white/40">
+            <Card className="p-12 text-center bg-white border-dashed border-gray-300 shadow-none">
+              <Users className="w-10 h-10 text-gray-300 mx-auto mb-4" />
+              <p className="text-gray-500">
                 {searchQuery ? "No students match your search." : "No students registered yet."}
               </p>
             </Card>
@@ -419,35 +425,35 @@ export default function AdminDashboard() {
                 });
 
                 return (
-                  <Card key={profile.uid} className="overflow-hidden">
+                  <Card key={profile.uid} className="overflow-hidden bg-white border-gray-200 shadow-sm">
                     {/* Summary row */}
                     <button
                       onClick={() => setExpandedStudent(isExpanded ? null : profile.uid)}
-                      className="w-full p-4 flex items-center gap-4 hover:bg-white/[0.02] transition-colors text-left"
+                      className="w-full p-4 flex items-center gap-4 hover:bg-gray-50 transition-colors text-left"
                     >
                       {/* Avatar */}
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-pink-500 flex items-center justify-center text-sm font-bold text-white flex-shrink-0">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-pink-500 flex items-center justify-center text-sm font-bold text-white flex-shrink-0">
                         {profile.name?.[0]?.toUpperCase() || "S"}
                       </div>
 
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <p className="text-white font-semibold text-sm">{profile.name}</p>
-                          <Badge variant="secondary" className="text-xs">{profile.studentId}</Badge>
-                          <Badge variant="outline" className="text-xs hidden sm:inline-flex">
+                          <p className="text-gray-900 font-semibold text-sm">{profile.name}</p>
+                          <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-600 border-gray-200">{profile.studentId}</Badge>
+                          <Badge variant="outline" className="text-xs hidden sm:inline-flex text-gray-500 border-gray-200">
                             {profile.favoriteSocialMedia}
                           </Badge>
                         </div>
-                        <p className="text-white/30 text-xs truncate">{profile.email}</p>
+                        <p className="text-gray-500 text-xs truncate">{profile.email}</p>
                       </div>
 
                       <div className="flex items-center gap-3 flex-shrink-0">
                         <div className="text-right hidden sm:block">
-                          <p className="text-white font-semibold text-sm">
+                          <p className="text-gray-900 font-semibold text-sm">
                             {attempts.length} attempts
                           </p>
                           {avgPct !== null && (
-                            <p className="text-white/40 text-xs">Avg {avgPct}%</p>
+                            <p className="text-gray-500 text-xs">Avg {avgPct}%</p>
                           )}
                         </div>
                         
@@ -457,7 +463,7 @@ export default function AdminDashboard() {
                             handleDeleteStudent(profile.uid, profile.name);
                           }}
                           disabled={deleting === profile.uid}
-                          className="w-8 h-8 rounded-lg flex items-center justify-center text-white/20 hover:text-red-400 hover:bg-red-500/10 transition-colors"
+                          className="w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors"
                           title="Delete Student"
                         >
                           {deleting === profile.uid ? (
@@ -468,48 +474,48 @@ export default function AdminDashboard() {
                         </button>
 
                         {isExpanded
-                          ? <ChevronUp className="w-4 h-4 text-white/30" />
-                          : <ChevronDown className="w-4 h-4 text-white/30" />
+                          ? <ChevronUp className="w-4 h-4 text-gray-400" />
+                          : <ChevronDown className="w-4 h-4 text-gray-400" />
                         }
                       </div>
                     </button>
 
                     {/* Expanded details */}
                     {isExpanded && (
-                      <div className="border-t border-white/5 p-4 space-y-3 bg-white/[0.01]">
-                        <p className="text-white/40 text-xs font-semibold uppercase tracking-wider">
+                      <div className="border-t border-gray-100 p-4 space-y-3 bg-gray-50/50">
+                        <p className="text-gray-500 text-xs font-semibold uppercase tracking-wider">
                           Quiz Performance
                         </p>
 
                         {attemptsByQuiz.map(({ quiz, attempts: qAttempts, best }) => (
                           <div
                             key={quiz.id}
-                            className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5"
+                            className="flex items-center gap-3 p-3 rounded-xl bg-white border border-gray-200"
                           >
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-2 mb-1">
-                                <Badge variant={quiz.type === "morning" ? "info" : "warning"} className="text-xs">
+                                <Badge className={`text-xs border-0 ${quiz.type === "morning" ? "bg-amber-100 text-amber-800" : "bg-indigo-100 text-indigo-800"}`}>
                                   D{quiz.day} {quiz.type === "morning" ? "AM" : "PM"}
                                 </Badge>
-                                <p className="text-white/60 text-xs truncate">{quiz.title}</p>
+                                <p className="text-gray-700 text-xs truncate">{quiz.title}</p>
                               </div>
                               {best ? (
                                 <div className="space-y-1">
                                   <div className="flex justify-between text-xs">
-                                    <span className="text-white/40">
+                                    <span className="text-gray-500">
                                       {qAttempts.length}/2 attempts · Best: {best.score}/{quiz.questions.length}
                                     </span>
-                                    <span className="text-violet-300 font-semibold">
+                                    <span className="text-blue-600 font-semibold">
                                       {Math.round((best.score / quiz.questions.length) * 100)}%
                                     </span>
                                   </div>
                                   <Progress
                                     value={(best.score / quiz.questions.length) * 100}
-                                    className="h-1"
+                                    className="h-1 bg-gray-100"
                                   />
                                 </div>
                               ) : (
-                                <p className="text-white/20 text-xs">No attempts</p>
+                                <p className="text-gray-400 text-xs">No attempts</p>
                               )}
                             </div>
 
@@ -518,7 +524,7 @@ export default function AdminDashboard() {
                               <button
                                 onClick={() => handleReset(profile.uid, quiz.id, profile.name, quiz.title)}
                                 disabled={resetting === `${profile.uid}-${quiz.id}`}
-                                className="flex-shrink-0 p-1.5 rounded-lg text-white/20 hover:text-red-400 hover:bg-red-500/10 transition-all"
+                                className="flex-shrink-0 p-1.5 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-all"
                                 title="Reset attempts"
                               >
                                 {resetting === `${profile.uid}-${quiz.id}` ? (
@@ -542,14 +548,14 @@ export default function AdminDashboard() {
 
       {/* ATTENDANCE TAB */}
       {activeTab === "attendance" && (
-        <Card className="overflow-hidden">
+        <Card className="overflow-hidden bg-white border-gray-200">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-white/[0.02] text-white/40 border-b border-white/5">
+              <thead className="bg-gray-50 text-gray-500 border-b border-gray-200">
                 <tr>
                   <th className="p-4 font-medium">Student</th>
                   {[1, 2, 3].map(day => (
-                    <th key={day} colSpan={2} className="p-4 font-medium text-center border-l border-white/5">
+                    <th key={day} colSpan={2} className="p-4 font-medium text-center border-l border-gray-200">
                       Day {day}
                     </th>
                   ))}
@@ -559,14 +565,14 @@ export default function AdminDashboard() {
                   <th className="p-2"></th>
                   {[1, 2, 3].map(day => (
                     <>
-                      <th key={`${day}-am`} className="p-2 text-center text-xs text-white/20 border-l border-white/5">AM</th>
-                      <th key={`${day}-pm`} className="p-2 text-center text-xs text-white/20">PM</th>
+                      <th key={`${day}-am`} className="p-2 text-center text-xs text-gray-400 border-l border-gray-200">AM</th>
+                      <th key={`${day}-pm`} className="p-2 text-center text-xs text-gray-400">PM</th>
                     </>
                   ))}
                   <th className="p-2"></th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-gray-100">
                 {studentRows.map(({ profile }) => {
                   const schedule = [
                     { day: 1, type: "morning" }, { day: 1, type: "afternoon" },
@@ -577,10 +583,10 @@ export default function AdminDashboard() {
                   const presentCount = allAttendance.filter(a => a.userId === profile.uid && a.present).length;
 
                   return (
-                    <tr key={profile.uid} className="hover:bg-white/[0.02] transition-colors">
+                    <tr key={profile.uid} className="hover:bg-gray-50 transition-colors">
                       <td className="p-4">
-                        <div className="font-semibold text-white">{profile.name}</div>
-                        <div className="text-xs text-white/40">{profile.studentId}</div>
+                        <div className="font-semibold text-gray-900">{profile.name}</div>
+                        <div className="text-xs text-gray-500">{profile.studentId}</div>
                       </td>
                       {schedule.map(({ day, type }) => {
                         const dateKey = `Day ${day}`; // Simple key for now, could be real date
@@ -590,17 +596,17 @@ export default function AdminDashboard() {
                         const isPresent = record?.present || false;
 
                         return (
-                          <td key={`${day}-${type}`} className="p-4 text-center border-l border-white/5">
+                          <td key={`${day}-${type}`} className="p-4 text-center border-l border-gray-100">
                             <input
                               type="checkbox"
                               checked={isPresent}
                               onChange={(e) => handleAttendanceChange(profile.uid, dateKey, type, e.target.checked)}
-                              className="w-4 h-4 rounded border-white/20 bg-white/5 text-violet-500 focus:ring-violet-500 focus:ring-offset-0"
+                              className="w-4 h-4 rounded border-gray-300 bg-white text-blue-600 focus:ring-blue-500 focus:ring-offset-0"
                             />
                           </td>
                         );
                       })}
-                      <td className="p-4 text-right font-mono text-white/60">
+                      <td className="p-4 text-right font-mono text-gray-500">
                          {presentCount} / 6
                       </td>
                     </tr>

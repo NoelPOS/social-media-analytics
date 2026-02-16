@@ -22,7 +22,7 @@ export default function RootPage() {
   return (
     <div className="min-h-screen flex items-center justify-center brand-bg">
       <div className="flex flex-col items-center gap-4">
-        <div className="w-12 h-12 rounded-full bg-gradient-to-r from-violet-500 to-purple-500 animate-pulse-slow" />
+        <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 animate-pulse-slow" />
         <p className="text-white/50 text-sm">Loading...</p>
       </div>
     </div>

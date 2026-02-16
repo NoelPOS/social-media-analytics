@@ -27,6 +27,9 @@ import {
   ArrowLeft,
   Send,
   Lock,
+  Sun,
+  Moon,
+  BookOpen,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -171,7 +174,7 @@ export default function QuizPage() {
   if (state === "loading") {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-violet-500/30 border-t-violet-500 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-blue-500/30 border-t-blue-500 rounded-full animate-spin" />
       </div>
     );
   }
@@ -195,7 +198,7 @@ export default function QuizPage() {
               {pastAttempts.map((a) => (
                 <div key={a.id} className="flex justify-between items-center text-sm">
                   <span className="text-white/50">Attempt {a.attemptNumber}</span>
-                  <span className="text-violet-300 font-semibold">
+                  <span className="text-blue-300 font-semibold">
                     {a.score} / {quiz.questions.length} (
                     {Math.round((a.score / quiz.questions.length) * 100)}%)
                   </span>
@@ -227,8 +230,9 @@ export default function QuizPage() {
           {/* Card */}
           <div className="glass rounded-2xl p-8 space-y-6 border border-white/8">
             <div className="flex items-center gap-3">
-              <Badge variant={quiz.type === "morning" ? "info" : "warning"}>
-                Day {quiz.day} · {quiz.type === "morning" ? "☀️ Morning" : "🌙 Afternoon"}
+              <Badge variant={quiz.type === "morning" ? "info" : "warning"} className="flex items-center gap-1">
+                {quiz.type === "morning" ? <Sun className="w-3 h-3" /> : <Moon className="w-3 h-3" />}
+                Day {quiz.day} · {quiz.type === "morning" ? "Morning" : "Afternoon"}
               </Badge>
               <Badge variant="success">Open</Badge>
             </div>
@@ -277,8 +281,8 @@ export default function QuizPage() {
 
             {/* Previous attempt score */}
             {pastAttempts.length > 0 && (
-              <div className="rounded-xl bg-violet-500/10 border border-violet-500/20 p-3 text-sm">
-                <p className="text-violet-300">
+              <div className="rounded-xl bg-blue-500/10 border border-blue-500/20 p-3 text-sm">
+                <p className="text-blue-300">
                   Previous score:{" "}
                   <span className="font-bold">
                     {pastAttempts[0].score} / {quiz.questions.length}
@@ -352,7 +356,7 @@ export default function QuizPage() {
                     ? "bg-red-500"
                     : isTimeWarning
                     ? "bg-amber-500"
-                    : "bg-gradient-to-r from-violet-500 to-purple-500"
+                    : "bg-blue-600"
                 )}
                 style={{ width: `${timePercent}%` }}
               />
@@ -371,7 +375,7 @@ export default function QuizPage() {
                 className={cn(
                   "w-7 h-7 rounded-lg text-xs font-semibold transition-all duration-200",
                   i === currentQ
-                    ? "bg-violet-500 text-white scale-110"
+                    ? "bg-blue-500 text-white scale-110"
                     : answers[i] !== undefined
                     ? "bg-emerald-500/30 text-emerald-300 border border-emerald-500/30"
                     : "bg-white/5 text-white/40 hover:bg-white/10"
@@ -403,7 +407,7 @@ export default function QuizPage() {
                       "quiz-option w-full text-left rounded-xl border p-4 transition-all duration-200",
                       "flex items-center gap-4 group",
                       selected
-                        ? "bg-violet-500/20 border-violet-500/50 text-white shadow-lg shadow-violet-500/10"
+                        ? "bg-blue-500/20 border-blue-500/50 text-white shadow-lg shadow-blue-500/10"
                         : "bg-white/[0.02] border-white/8 text-white/70 hover:bg-white/[0.06] hover:border-white/20 hover:text-white"
                     )}
                   >
@@ -411,7 +415,7 @@ export default function QuizPage() {
                       className={cn(
                         "w-7 h-7 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0 transition-all",
                         selected
-                          ? "bg-violet-500 text-white"
+                          ? "bg-blue-500 text-white"
                           : "bg-white/5 text-white/40 group-hover:bg-white/10"
                       )}
                     >
@@ -419,7 +423,7 @@ export default function QuizPage() {
                     </div>
                     <span className="text-sm leading-relaxed">{option}</span>
                     {selected && (
-                      <CheckCircle2 className="w-4 h-4 text-violet-400 ml-auto flex-shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-blue-400 ml-auto flex-shrink-0" />
                     )}
                   </button>
                 );
@@ -455,7 +459,7 @@ export default function QuizPage() {
                 variant="success"
                 onClick={() => handleSubmit(false)}
                 size="sm"
-                className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:from-emerald-500 hover:to-teal-500"
+                className="bg-emerald-600 text-white hover:bg-emerald-700"
               >
                 Submit Quiz <Send className="w-4 h-4" />
               </Button>
@@ -467,7 +471,7 @@ export default function QuizPage() {
             <Button
               variant="success"
               onClick={() => handleSubmit(false)}
-              className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white"
+              className="w-full bg-emerald-600 text-white hover:bg-emerald-700"
             >
               <Send className="w-4 h-4" /> Submit All Answers
             </Button>
@@ -489,15 +493,15 @@ export default function QuizPage() {
             className={cn(
               "rounded-2xl p-8 text-center border",
               isPassing
-                ? "bg-gradient-to-br from-emerald-900/40 to-teal-900/20 border-emerald-500/30"
-                : "bg-gradient-to-br from-red-900/30 to-rose-900/20 border-red-500/20"
+                ? "bg-emerald-900/40 border-emerald-500/30"
+                : "bg-red-900/30 border-red-500/20"
             )}
           >
             <div className={cn(
-              "w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 text-4xl",
+              "w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4",
               isPassing ? "bg-emerald-500/20" : "bg-red-500/20"
             )}>
-              {isPassing ? "🏆" : "📚"}
+              {isPassing ? <Trophy className="w-10 h-10 text-emerald-400" /> : <BookOpen className="w-10 h-10 text-red-400" />}
             </div>
 
             <h1 className="text-4xl font-black text-white mb-1">{percentage}%</h1>
@@ -521,7 +525,7 @@ export default function QuizPage() {
           {/* Answer review */}
           <div className="space-y-3">
             <h2 className="text-white font-bold text-lg flex items-center gap-2">
-              <Trophy className="w-5 h-5 text-violet-400" /> Answer Review
+              <Trophy className="w-5 h-5 text-blue-400" /> Answer Review
             </h2>
             {quiz.questions.map((q, i) => {
               const userAns = result.answers[i];
@@ -547,8 +551,8 @@ export default function QuizPage() {
                         Your answer: {q.options[userAns]}
                       </p>
                     )}
-                    <p className="text-emerald-400 font-semibold">
-                      ✓ Correct: {q.options[correct]}
+                    <p className="text-emerald-400 font-semibold flex items-center gap-1">
+                      <CheckCircle2 className="w-3 h-3" /> Correct: {q.options[correct]}
                     </p>
                   </div>
                 </Card>
