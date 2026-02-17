@@ -181,24 +181,24 @@ export default function QuizPage() {
 
   if (state === "blocked") {
     return (
-      <div className="min-h-screen flex items-center justify-center p-6">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
         <div className="max-w-sm w-full space-y-4 text-center">
-          <div className="w-16 h-16 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto">
-            <Lock className="w-7 h-7 text-red-400" />
+          <div className="w-16 h-16 rounded-2xl bg-red-100 border border-red-200 flex items-center justify-center mx-auto">
+            <Lock className="w-7 h-7 text-red-600" />
           </div>
-          <h2 className="text-white font-bold text-xl">Access Restricted</h2>
-          <p className="text-white/50 text-sm leading-relaxed">{blockReason}</p>
+          <h2 className="text-gray-900 font-bold text-xl">Access Restricted</h2>
+          <p className="text-gray-500 text-sm leading-relaxed">{blockReason}</p>
 
           {/* Show past attempts if they exist */}
           {pastAttempts.length > 0 && quiz && (
-            <div className="glass rounded-2xl p-4 space-y-2 text-left">
-              <p className="text-white/60 text-xs font-semibold uppercase tracking-wider mb-3">
+            <div className="bg-white rounded-2xl p-4 space-y-2 text-left shadow-sm border border-gray-200">
+              <p className="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-3">
                 Your Attempts
               </p>
               {pastAttempts.map((a) => (
                 <div key={a.id} className="flex justify-between items-center text-sm">
-                  <span className="text-white/50">Attempt {a.attemptNumber}</span>
-                  <span className="text-blue-300 font-semibold">
+                  <span className="text-gray-600">Attempt {a.attemptNumber}</span>
+                  <span className="text-blue-600 font-semibold">
                     {a.score} / {quiz.questions.length} (
                     {Math.round((a.score / quiz.questions.length) * 100)}%)
                   </span>
@@ -207,7 +207,7 @@ export default function QuizPage() {
             </div>
           )}
 
-          <Button variant="outline" onClick={() => router.push("/dashboard")} className="w-full">
+          <Button variant="outline" onClick={() => router.push("/dashboard")} className="w-full border-gray-200 text-gray-700 hover:bg-gray-50 hover:text-gray-900">
             <ArrowLeft className="w-4 h-4" /> Back to Dashboard
           </Button>
         </div>
@@ -217,18 +217,18 @@ export default function QuizPage() {
 
   if (state === "intro" && quiz) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-6">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
         <div className="max-w-lg w-full space-y-6 animate-fade-in">
           {/* Back */}
           <button
             onClick={() => router.push("/dashboard")}
-            className="flex items-center gap-2 text-white/40 hover:text-white transition-colors text-sm"
+            className="flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors text-sm"
           >
             <ArrowLeft className="w-4 h-4" /> Dashboard
           </button>
 
           {/* Card */}
-          <div className="glass rounded-2xl p-8 space-y-6 border border-white/8">
+          <div className="bg-white rounded-2xl p-8 space-y-6 border border-gray-200 shadow-xl">
             <div className="flex items-center gap-3">
               <Badge variant={quiz.type === "morning" ? "info" : "warning"} className="flex items-center gap-1">
                 {quiz.type === "morning" ? <Sun className="w-3 h-3" /> : <Moon className="w-3 h-3" />}
@@ -238,8 +238,8 @@ export default function QuizPage() {
             </div>
 
             <div>
-              <h1 className="text-2xl font-black text-white">{quiz.title}</h1>
-              <p className="text-white/40 mt-1 text-sm">
+              <h1 className="text-2xl font-black text-gray-900">{quiz.title}</h1>
+              <p className="text-gray-500 mt-1 text-sm">
                 Attempt {pastAttempts.length + 1} of 2
               </p>
             </div>
@@ -251,29 +251,29 @@ export default function QuizPage() {
                   icon: Clock,
                   label: "Time Limit",
                   value: `${Math.floor(quiz.timeLimit / 60)} minutes`,
-                  color: "text-blue-400",
-                  bg: "bg-blue-500/10",
+                  color: "text-blue-600",
+                  bg: "bg-blue-50",
                 },
                 {
                   icon: CheckCircle2,
                   label: "Questions",
                   value: `${quiz.questions.length} multiple choice`,
-                  color: "text-emerald-400",
-                  bg: "bg-emerald-500/10",
+                  color: "text-emerald-600",
+                  bg: "bg-emerald-50",
                 },
                 {
                   icon: AlertTriangle,
                   label: "Attempts",
                   value: `${pastAttempts.length + 1} / 2 — ${2 - pastAttempts.length - 1} remaining after this`,
-                  color: "text-amber-400",
-                  bg: "bg-amber-500/10",
+                  color: "text-amber-600",
+                  bg: "bg-amber-50",
                 },
               ].map(({ icon: Icon, label, value, color, bg }) => (
-                <div key={label} className={`flex items-center gap-3 rounded-xl p-3 ${bg} border border-white/5`}>
+                <div key={label} className={`flex items-center gap-3 rounded-xl p-3 ${bg} border border-transparent`}>
                   <Icon className={`w-5 h-5 ${color} flex-shrink-0`} />
                   <div>
-                    <p className="text-white/60 text-xs">{label}</p>
-                    <p className="text-white font-medium text-sm">{value}</p>
+                    <p className="text-gray-500 text-xs">{label}</p>
+                    <p className="text-gray-900 font-medium text-sm">{value}</p>
                   </div>
                 </div>
               ))}
@@ -281,8 +281,8 @@ export default function QuizPage() {
 
             {/* Previous attempt score */}
             {pastAttempts.length > 0 && (
-              <div className="rounded-xl bg-blue-500/10 border border-blue-500/20 p-3 text-sm">
-                <p className="text-blue-300">
+              <div className="rounded-xl bg-blue-50 border border-blue-100 p-3 text-sm">
+                <p className="text-blue-700">
                   Previous score:{" "}
                   <span className="font-bold">
                     {pastAttempts[0].score} / {quiz.questions.length}
@@ -293,7 +293,7 @@ export default function QuizPage() {
             )}
 
             <div className="pt-2 space-y-2">
-              <p className="text-white/30 text-xs text-center">
+              <p className="text-gray-400 text-xs text-center">
                 The timer starts when you click "Begin Quiz". Auto-submits when time runs out.
               </p>
               <Button onClick={startQuiz} className="w-full" size="lg">
@@ -310,16 +310,16 @@ export default function QuizPage() {
     const question = quiz.questions[currentQ];
 
     return (
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen bg-gray-50 flex flex-col">
         {/* Quiz header */}
         <div
           className={cn(
             "sticky top-0 z-20 px-4 md:px-6 py-3 border-b backdrop-blur-xl transition-colors",
             isTimeCritical
-              ? "bg-red-950/80 border-red-500/30"
+              ? "bg-red-50 border-red-200"
               : isTimeWarning
-              ? "bg-amber-950/60 border-amber-500/20"
-              : "bg-black/30 border-white/5"
+              ? "bg-amber-50 border-amber-200"
+              : "bg-white/80 border-gray-200"
           )}
         >
           <div className="max-w-3xl mx-auto flex items-center justify-between gap-4">
@@ -327,7 +327,7 @@ export default function QuizPage() {
               <Badge variant="secondary" className="flex-shrink-0">
                 Q {currentQ + 1}/{quiz.questions.length}
               </Badge>
-              <p className="text-white/60 text-sm truncate hidden sm:block">{quiz.title}</p>
+              <p className="text-gray-600 text-sm truncate hidden sm:block">{quiz.title}</p>
             </div>
 
             {/* Timer */}
@@ -335,10 +335,10 @@ export default function QuizPage() {
               className={cn(
                 "flex items-center gap-2 rounded-xl px-3 py-1.5 font-mono font-bold text-sm flex-shrink-0",
                 isTimeCritical
-                  ? "bg-red-500/20 text-red-300 animate-pulse"
+                  ? "bg-red-100 text-red-600 animate-pulse"
                   : isTimeWarning
-                  ? "bg-amber-500/20 text-amber-300"
-                  : "bg-white/5 text-white"
+                  ? "bg-amber-100 text-amber-700"
+                  : "bg-gray-100 text-gray-700"
               )}
             >
               <Clock className="w-4 h-4" />
@@ -348,7 +348,7 @@ export default function QuizPage() {
 
           {/* Time progress bar */}
           <div className="max-w-3xl mx-auto mt-2">
-            <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+            <div className="h-1 w-full bg-gray-200 rounded-full overflow-hidden">
               <div
                 className={cn(
                   "h-full rounded-full transition-all duration-1000",
@@ -377,8 +377,8 @@ export default function QuizPage() {
                   i === currentQ
                     ? "bg-blue-500 text-white scale-110"
                     : answers[i] !== undefined
-                    ? "bg-emerald-500/30 text-emerald-300 border border-emerald-500/30"
-                    : "bg-white/5 text-white/40 hover:bg-white/10"
+                    ? "bg-emerald-100 text-emerald-700 border border-emerald-200"
+                    : "bg-white border border-gray-200 text-gray-400 hover:bg-gray-50 hover:text-gray-600"
                 )}
               >
                 {i + 1}
@@ -387,11 +387,11 @@ export default function QuizPage() {
           </div>
 
           {/* Question card */}
-          <Card className="p-6 md:p-8 slide-enter">
-            <p className="text-white/40 text-xs font-semibold uppercase tracking-wider mb-3">
+          <Card className="p-6 md:p-8 slide-enter bg-white border-gray-200 shadow-sm">
+            <p className="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-3">
               Question {currentQ + 1}
             </p>
-            <h2 className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
+            <h2 className="text-gray-900 text-lg md:text-xl font-semibold leading-relaxed mb-6">
               {question.text}
             </h2>
 
@@ -407,8 +407,8 @@ export default function QuizPage() {
                       "quiz-option w-full text-left rounded-xl border p-4 transition-all duration-200",
                       "flex items-center gap-4 group",
                       selected
-                        ? "bg-blue-500/20 border-blue-500/50 text-white shadow-lg shadow-blue-500/10"
-                        : "bg-white/[0.02] border-white/8 text-white/70 hover:bg-white/[0.06] hover:border-white/20 hover:text-white"
+                        ? "bg-blue-50 border-blue-500 text-blue-900 shadow-sm"
+                        : "bg-white border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300"
                     )}
                   >
                     <div
@@ -416,14 +416,14 @@ export default function QuizPage() {
                         "w-7 h-7 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0 transition-all",
                         selected
                           ? "bg-blue-500 text-white"
-                          : "bg-white/5 text-white/40 group-hover:bg-white/10"
+                          : "bg-gray-100 text-gray-500 group-hover:bg-gray-200"
                       )}
                     >
                       {String.fromCharCode(65 + optIdx)}
                     </div>
                     <span className="text-sm leading-relaxed">{option}</span>
                     {selected && (
-                      <CheckCircle2 className="w-4 h-4 text-blue-400 ml-auto flex-shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-blue-500 ml-auto flex-shrink-0" />
                     )}
                   </button>
                 );
@@ -438,11 +438,12 @@ export default function QuizPage() {
               onClick={() => setCurrentQ((q) => Math.max(0, q - 1))}
               disabled={currentQ === 0}
               size="sm"
+              className="border-gray-200 text-gray-700 hover:bg-gray-50"
             >
               <ChevronLeft className="w-4 h-4" /> Previous
             </Button>
 
-            <span className="text-white/30 text-xs">
+            <span className="text-gray-400 text-xs">
               {answeredCount}/{quiz.questions.length} answered
             </span>
 
@@ -486,29 +487,29 @@ export default function QuizPage() {
     const isPassing = percentage >= 60;
 
     return (
-      <div className="min-h-screen flex items-center justify-center p-6">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
         <div className="max-w-2xl w-full space-y-6 animate-fade-in">
           {/* Score card */}
           <div
             className={cn(
-              "rounded-2xl p-8 text-center border",
+              "rounded-2xl p-8 text-center border shadow-sm",
               isPassing
-                ? "bg-emerald-900/40 border-emerald-500/30"
-                : "bg-red-900/30 border-red-500/20"
+                ? "bg-emerald-50 border-emerald-200"
+                : "bg-red-50 border-red-200"
             )}
           >
             <div className={cn(
               "w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4",
-              isPassing ? "bg-emerald-500/20" : "bg-red-500/20"
+              isPassing ? "bg-emerald-100" : "bg-red-100"
             )}>
-              {isPassing ? <Trophy className="w-10 h-10 text-emerald-400" /> : <BookOpen className="w-10 h-10 text-red-400" />}
+              {isPassing ? <Trophy className="w-10 h-10 text-emerald-600" /> : <BookOpen className="w-10 h-10 text-red-600" />}
             </div>
 
-            <h1 className="text-4xl font-black text-white mb-1">{percentage}%</h1>
-            <p className={cn("text-lg font-bold mb-1", isPassing ? "text-emerald-400" : "text-red-400")}>
+            <h1 className="text-4xl font-black text-gray-900 mb-1">{percentage}%</h1>
+            <p className={cn("text-lg font-bold mb-1", isPassing ? "text-emerald-700" : "text-red-700")}>
               {isPassing ? "Excellent Work!" : "Keep Practicing!"}
             </p>
-            <p className="text-white/40 text-sm">
+            <p className="text-gray-500 text-sm">
               {result.score} out of {result.total} correct
             </p>
 
@@ -517,15 +518,15 @@ export default function QuizPage() {
               <Progress
                 value={percentage}
                 indicatorClassName={isPassing ? "from-emerald-500 to-teal-500" : "from-red-500 to-rose-500"}
-                className="h-3"
+                className={cn("h-3", isPassing ? "bg-emerald-100" : "bg-red-100")}
               />
             </div>
           </div>
 
           {/* Answer review */}
           <div className="space-y-3">
-            <h2 className="text-white font-bold text-lg flex items-center gap-2">
-              <Trophy className="w-5 h-5 text-blue-400" /> Answer Review
+            <h2 className="text-gray-900 font-bold text-lg flex items-center gap-2">
+              <Trophy className="w-5 h-5 text-blue-600" /> Answer Review
             </h2>
             {quiz.questions.map((q, i) => {
               const userAns = result.answers[i];
@@ -535,23 +536,23 @@ export default function QuizPage() {
               return (
                 <Card key={i} className={cn(
                   "p-4 border",
-                  isCorrect ? "border-emerald-500/20 bg-emerald-500/5" : "border-red-500/20 bg-red-500/5"
+                  isCorrect ? "border-emerald-200 bg-emerald-50" : "border-red-200 bg-red-50"
                 )}>
                   <div className="flex items-start gap-3 mb-2">
                     {isCorrect
-                      ? <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                      : <XCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                      ? <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                      : <XCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
                     }
-                    <p className="text-white text-sm font-medium">{q.text}</p>
+                    <p className="text-gray-900 text-sm font-medium">{q.text}</p>
                   </div>
 
                   <div className="ml-8 space-y-1 text-xs">
                     {userAns !== undefined && userAns !== correct && (
-                      <p className="text-red-400">
+                      <p className="text-red-600">
                         Your answer: {q.options[userAns]}
                       </p>
                     )}
-                    <p className="text-emerald-400 font-semibold flex items-center gap-1">
+                    <p className="text-emerald-700 font-semibold flex items-center gap-1">
                       <CheckCircle2 className="w-3 h-3" /> Correct: {q.options[correct]}
                     </p>
                   </div>
@@ -562,7 +563,8 @@ export default function QuizPage() {
 
           <Button
             onClick={() => router.push("/dashboard")}
-            className="w-full"
+            className="w-full border-gray-200 text-gray-700 hover:bg-gray-50 hover:text-gray-900 bg-white"
+            variant="outline"
             size="lg"
           >
             <ArrowLeft className="w-4 h-4" /> Back to Dashboard

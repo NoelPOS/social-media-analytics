@@ -11,7 +11,7 @@ export const MOCK_QUIZZES: Omit<Quiz, "id">[] = [
     type: "morning",
     title: "Day 1 Morning: Foundations of Social Media Analytics",
     active: false,
-    timeLimit: 1500,
+    timeLimit: 2400,
     questions: [
       // EASY
       { text: "What is Social Media Analytics?", options: ["The process of designing social media platforms", "The practice of gathering and analyzing data from social media to inform decisions", "Creating content for social media channels", "Managing customer complaints on social media"], correctIndex: 1 },
@@ -71,7 +71,7 @@ export const MOCK_QUIZZES: Omit<Quiz, "id">[] = [
     type: "afternoon",
     title: "Day 1 Afternoon: Strategy, Campaigns & Data Collection",
     active: false,
-    timeLimit: 1500,
+    timeLimit: 2400,
     questions: [
       // EASY
       { text: "What does 'A/B testing' mean in social media?", options: ["Testing the platform on two different devices", "Comparing two content variations to see which performs better", "Using two social media accounts simultaneously", "Posting twice on the same day"], correctIndex: 1 },
@@ -128,7 +128,7 @@ export const MOCK_QUIZZES: Omit<Quiz, "id">[] = [
     type: "morning",
     title: "Day 2 Morning: Platform-Specific Analytics",
     active: false,
-    timeLimit: 1500,
+    timeLimit: 2400,
     questions: [
       // EASY
       { text: "What is Instagram's native analytics tool called?", options: ["Instagram Stats", "Meta Business Suite / Instagram Insights", "Creator Dashboard", "Profile Analytics"], correctIndex: 1 },
@@ -183,7 +183,7 @@ export const MOCK_QUIZZES: Omit<Quiz, "id">[] = [
     type: "afternoon",
     title: "Day 2 Afternoon: Advanced Analytics, Reporting & Optimization",
     active: false,
-    timeLimit: 1500,
+    timeLimit: 2400,
     questions: [
       // EASY
       { text: "What is a 'social media audit'?", options: ["A financial review of social media advertising spend", "A systematic review of all social media accounts, performance, and strategy to identify strengths and gaps", "An automated check for fake followers", "A legal compliance review of social media content"], correctIndex: 1 },
