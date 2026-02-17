@@ -7,6 +7,10 @@ import {
   getQuiz,
   getUserAttempts,
   submitAttempt,
+  getQuizSession,
+  startQuizSession,
+  updateSessionAnswers,
+  clearQuizSession,
   Quiz,
   Attempt,
 } from "@/lib/firestore";
@@ -63,13 +67,14 @@ export default function QuizPage() {
     }
   }, []);
 
-  // Load quiz + check eligibility
+  // Load quiz + check eligibility + resume any in-progress session
   useEffect(() => {
     if (!user) return;
     (async () => {
-      const [q, attempts] = await Promise.all([
+      const [q, attempts, session] = await Promise.all([
         getQuiz(quizId),
         getUserAttempts(user.uid, quizId),
+        getQuizSession(user.uid, quizId),
       ]);
 
       if (!q) {
@@ -91,25 +96,81 @@ export default function QuizPage() {
         return;
       }
 
+      // ── Resume or auto-submit an in-progress session ──────────────────────
+      if (session) {
+        const elapsed = Math.floor((Date.now() - session.startedAt.toMillis()) / 1000);
+        const remaining = q.timeLimit - elapsed;
+
+        // Restore answers (Firestore keys are strings; cast back to numbers)
+        const restoredAnswers: Record<number, number> = {};
+        Object.entries(session.answers).forEach(([k, v]) => {
+          restoredAnswers[Number(k)] = v;
+        });
+
+        if (remaining <= 0) {
+          // Time expired while the student was away — auto-submit immediately
+          const score = q.questions.reduce(
+            (acc, question, i) =>
+              session.answers[String(i)] === question.correctIndex ? acc + 1 : acc,
+            0
+          );
+          await clearQuizSession(user.uid, quizId);
+          await submitAttempt({
+            userId: user.uid,
+            quizId,
+            score,
+            answers: session.answers,
+            timestamp: Timestamp.now(),
+            attemptNumber: session.attemptNumber,
+            timeTaken: q.timeLimit,
+          });
+          setResult({ score, total: q.questions.length, answers: restoredAnswers });
+          setState("submitted");
+        } else {
+          // Resume the quiz — timer continues from where it left off
+          setCurrentQ(0);
+          setAnswers(restoredAnswers);
+          setTimeLeft(remaining);
+          setStartTime(session.startedAt.toMillis());
+          setState("active");
+          timerRef.current = setInterval(() => {
+            setTimeLeft((t) => {
+              if (t <= 1) { stopTimer(); return 0; }
+              return t - 1;
+            });
+          }, 1000);
+        }
+        return;
+      }
+
       setState("intro");
     })();
-  }, [user, quizId]);
+  }, [user, quizId, stopTimer]);
 
   const startQuiz = () => {
-    if (!quiz) return;
+    if (!quiz || !user) return;
+    const attemptNum = (pastAttempts.length + 1) as 1 | 2;
+    const now = Timestamp.now();
+
+    // Persist session to Firestore — this records the server-side start time
+    // so refreshing cannot reset the clock.
+    startQuizSession({
+      userId: user.uid,
+      quizId,
+      startedAt: now,
+      attemptNumber: attemptNum,
+      answers: {},
+    }).catch(console.error);
+
     setCurrentQ(0);
     setAnswers({});
     setTimeLeft(quiz.timeLimit);
-    setStartTime(Date.now());
+    setStartTime(now.toMillis());
     setState("active");
 
-    // Start countdown timer
     timerRef.current = setInterval(() => {
       setTimeLeft((t) => {
-        if (t <= 1) {
-          stopTimer();
-          return 0;
-        }
+        if (t <= 1) { stopTimer(); return 0; }
         return t - 1;
       });
     }, 1000);
@@ -127,6 +188,9 @@ export default function QuizPage() {
     async (autoSubmit = false) => {
       if (!quiz || !user || state !== "active") return;
       stopTimer();
+
+      // Remove the in-progress session so a refresh no longer resumes the quiz
+      await clearQuizSession(user.uid, quizId);
 
       const score = quiz.questions.reduce(
         (acc, q, i) => (answers[i] === q.correctIndex ? acc + 1 : acc),
@@ -159,8 +223,24 @@ export default function QuizPage() {
   // Cleanup timer
   useEffect(() => () => stopTimer(), [stopTimer]);
 
+  // Warn before leaving during an active quiz — the timer keeps running server-side
+  useEffect(() => {
+    if (state !== "active") return;
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = ""; // Required by Chrome to show the dialog
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [state]);
+
   const selectAnswer = (qIdx: number, optIdx: number) => {
-    setAnswers((prev) => ({ ...prev, [qIdx]: optIdx }));
+    const updated = { ...answers, [qIdx]: optIdx };
+    setAnswers(updated);
+    // Persist answers so they survive a refresh (fire-and-forget)
+    if (user) {
+      updateSessionAnswers(user.uid, quizId, updated as Record<string, number>).catch(console.error);
+    }
   };
 
   const answeredCount = Object.keys(answers).length;
@@ -267,6 +347,13 @@ export default function QuizPage() {
                   value: `${pastAttempts.length + 1} / 2 — ${2 - pastAttempts.length - 1} remaining after this`,
                   color: "text-amber-600",
                   bg: "bg-amber-50",
+                },
+                {
+                  icon: AlertTriangle,
+                  label: "No Refresh Advantage",
+                  value: "Refreshing will not reset your timer. Your session is tracked server-side.",
+                  color: "text-red-600",
+                  bg: "bg-red-50",
                 },
               ].map(({ icon: Icon, label, value, color, bg }) => (
                 <div key={label} className={`flex items-center gap-3 rounded-xl p-3 ${bg} border border-transparent`}>

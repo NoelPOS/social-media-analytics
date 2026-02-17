@@ -184,6 +184,45 @@ export async function getAllAttendance(): Promise<Attendance[]> {
     return snap.docs.map((d) => d.data() as Attendance);
 }
 
+// ─── Quiz Session (anti-cheat: tracks in-progress attempts) ──────────────────
+
+export interface QuizSession {
+  id?: string;
+  userId: string;
+  quizId: string;
+  startedAt: Timestamp;
+  attemptNumber: 1 | 2;
+  answers: Record<string, number>;
+}
+
+/** Called when student clicks "Begin Quiz". Overwrites any stale session. */
+export async function startQuizSession(session: Omit<QuizSession, "id">): Promise<void> {
+  const id = `${session.userId}_${session.quizId}`;
+  await setDoc(doc(db, "quizSessions", id), session);
+}
+
+/** Fetch an in-progress session (null if none). */
+export async function getQuizSession(userId: string, quizId: string): Promise<QuizSession | null> {
+  const snap = await getDoc(doc(db, "quizSessions", `${userId}_${quizId}`));
+  return snap.exists() ? ({ id: snap.id, ...snap.data() } as QuizSession) : null;
+}
+
+/** Persist current answers so they survive a page refresh. */
+export async function updateSessionAnswers(
+  userId: string,
+  quizId: string,
+  answers: Record<string, number>
+): Promise<void> {
+  await updateDoc(doc(db, "quizSessions", `${userId}_${quizId}`), { answers });
+}
+
+/** Delete the session once the attempt has been submitted. */
+export async function clearQuizSession(userId: string, quizId: string): Promise<void> {
+  await deleteDoc(doc(db, "quizSessions", `${userId}_${quizId}`));
+}
+
+// ─── Student Operations ───────────────────────────────────────────────────────
+
 // ─── Student Operations ───────────────────────────────────────────────────────
 
 export async function deleteStudent(userId: string) {
