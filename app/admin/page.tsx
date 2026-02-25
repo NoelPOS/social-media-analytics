@@ -225,7 +225,7 @@ export default function AdminDashboard() {
         <div className="grid sm:grid-cols-2 gap-3">
           {[
             { day: "day1", label: "Day 1", description: "Introduction to Social Media Analytics" },
-            { day: "day2", label: "Day 2", description: "Platform Analytics & Advanced Strategies" },
+            { day: "day4", label: "Day 4", description: "Multi-Touch Attribution in Marketing" },
           ].map(({ day, label, description }) => (
             <Link key={day} href={`/slides/${day}`}>
               <Card className="p-4 bg-white border-gray-200 hover:border-blue-300 hover:shadow-md transition-all duration-200 cursor-pointer group flex items-center gap-4">

@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 const navItems = [
   { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
   { href: "/slides/day1", icon: BookOpen, label: "Day 1 Slides" },
-  // { href: "/slides/day2", icon: BookOpen, label: "Day 2 Slides" },
+  { href: "/slides/day4", icon: BookOpen, label: "Day 4 Slides" },
   // { href: "/quizzes", icon: ClipboardList, label: "Quizzes" },
 ];
 

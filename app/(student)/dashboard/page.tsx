@@ -66,7 +66,6 @@ export default function DashboardPage() {
 
   const daySlides = [
     { day: 1, label: "Day 1", description: "Introduction to Social Media Analytics", icon: <BarChart className="w-8 h-8 text-blue-500" /> },
-    { day: 2, label: "Day 2", description: "Platform Analytics & Advanced Strategies", icon: <LineChart className="w-8 h-8 text-purple-500" /> },
     { day: 4, label: "Day 4", description: "Multi-Touch Attribution in Marketing", icon: <TrendingUp className="w-8 h-8 text-emerald-500" /> },
   ];
 
