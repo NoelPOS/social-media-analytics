@@ -21,6 +21,7 @@ import { cn } from "@/lib/utils";
 const SLIDES_PER_DAY: Record<string, number> = {
   day1: 70,
   day2: 20,
+  day4: 57,
 };
 
 export default function SlidesPage() {
@@ -86,7 +87,7 @@ export default function SlidesPage() {
     return () => document.removeEventListener("fullscreenchange", handler);
   }, []);
 
-  const slideLabel = day === "day1" ? "Day 1" : day === "day2" ? "Day 2" : day.toUpperCase();
+  const slideLabel = day === "day1" ? "Day 1" : day === "day2" ? "Day 2" : day === "day4" ? "Day 4: Attribution" : day.toUpperCase();
   const slidePath = `/slides/${day}/${current}.png`;
 
   return (

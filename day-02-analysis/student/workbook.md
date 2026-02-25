@@ -1,1047 +1,1500 @@
-# Day 2 Student Workbook: Analysis and Visualization
+# Day 2 Student Workbook: YouTube Performance Analytics
 
-## 📖 Welcome to Day 2!
+## 📚 From Data Collection to Business Insights
 
-**Today's Focus:** Turning data into insights through analysis and visualization
-
-**Your Name:** _______________________________  
-**Date:** _______________________________  
-**Group/Team:** _______________________________
-
----
-
-## 🎯 Today's Objectives
-
-By the end of today, I will be able to:
-- [ ] Analyze engagement patterns and identify trends
-- [ ] Perform basic sentiment analysis
-- [ ] Select appropriate chart types for different data
-- [ ] Create professional data visualizations
-- [ ] Build an interactive dashboard
-- [ ] Present data-driven insights
+**Course:** Social Media Analytics
+**Day:** 2 of 3 — Practical Workshop
+**Your Name:** _________________________________
+**Date:** _________________________________
+**Channel You Are Analyzing:** _________________________________
 
 ---
 
-## 📋 Materials Checklist
+## 🎯 Today's Learning Objectives
 
-Do you have:
-- [ ] This workbook (check!)
-- [ ] Laptop with Excel or Google Sheets
-- [ ] Access to dashboard template file
-- [ ] Calculator (or phone calculator)
-- [ ] Pen/pencil
-- [ ] Positive attitude 😊
+By the end of today, you will be able to:
 
----
-
-## 🌅 MORNING SESSION
-
-### 📊 SECTION 1: Data Analysis Techniques (10:15-11:00 AM)
+- [ ] Connect to the YouTube Data API and extract real video data
+- [ ] Clean and structure raw data using pandas in Python
+- [ ] Calculate engagement metrics from raw counts
+- [ ] Create 6+ data visualizations using matplotlib
+- [ ] Identify performance patterns through exploratory analysis
+- [ ] Build a reporting dashboard using Google Looker Studio
+- [ ] Translate data findings into concrete business recommendations
 
 ---
 
-#### What is Analysis?
+## 🔑 Your Key Information (Fill in as you go)
 
-Complete the flow:
+| Item | Your Value |
+|---|---|
+| Google Colab notebook link | |
+| YouTube Channel ID | |
+| Videos collected | |
+| Date range of data | |
+| Avg. engagement rate | |
+| Dashboard link | |
+
+---
+
+## 🌅 MORNING SESSION (10:00 AM – 12:00 PM)
+
+### Theme: Data Collection & Preparation
+
+---
+
+## 🎬 Session 1: Case Study Introduction (10:00–10:20 AM)
+
+**Format:** Discussion — no coding yet
+
+---
+
+### The Business Scenario
+
+*Write the scenario in your own words:*
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+### The 5 Business Questions
+
+These questions guide everything we do today. Write them below — we will answer each one with data.
+
+| # | Business Question | Session That Answers It |
+|---|---|---|
+| 1 | | |
+| 2 | | |
+| 3 | | |
+| 4 | | |
+| 5 | | |
+
+### The Day's Workflow
+
+Complete the workflow chain:
 
 ```
-Raw Data → _____________ → _____________ → _____________
+______________ → Raw JSON → ______________ → Cleaning → Feature Engineering
+      ↓
+______________ Charts → ______________ Analysis → Dashboard → ______________
 ```
 
-**Four Key Questions of Analysis:**
+### Key Concepts to Note
 
-1. **Descriptive:** "_______________________?"
-2. **Diagnostic:** "_______________________?"
-3. **Predictive:** "_______________________?"
-4. **Prescriptive:** "_______________________?"
+**What is an API?**
 
-**Example:**
-- What: Engagement dropped _____% last week
-- Why: Posted at _____________ times than usual
-- What will: If we continue, engagement stays _____________
-- Do: Return to _____________ posting times
+________________________________________________________________________________
 
----
+________________________________________________________________________________
 
-#### Trend Analysis
+**What is a DataFrame?**
 
-**Definition:** 
-_________________________________________________________________
-_________________________________________________________________
+________________________________________________________________________________
 
-**Four Types of Trends:**
+**Raw data vs. clean data — why does it matter?**
 
-**1. Linear Trend**
-- Description: _______________________________________________
-- Example: _______________________________________________
+________________________________________________________________________________
 
-**2. Exponential Trend**
-- Description: _______________________________________________
-- Example: _______________________________________________
+________________________________________________________________________________
 
-**3. Seasonal Trend**
-- Description: _______________________________________________
-- Example: _______________________________________________
+### Opening Discussion
 
-**4. Declining Trend**
-- Description: _______________________________________________
-- Example: _______________________________________________
+*Your answer to: "What would you want to know if you ran a YouTube channel?"*
+
+1. ___________________________________________________________________________
+
+2. ___________________________________________________________________________
+
+3. ___________________________________________________________________________
 
 ---
 
-#### Activity: Identify the Trend
+## 📡 Session 2: YouTube API Setup & Data Extraction (10:20–11:00 AM)
 
-**Dataset 1: Monthly Followers**
-```
-Jan: 5,000  |  Feb: 5,100  |  Mar: 5,200
-Apr: 5,300  |  May: 5,400  |  Jun: 5,500
-```
-
-**Trend Type:** _____________________
-
-**My Reasoning:**
-_________________________________________________________________
-_________________________________________________________________
-
-**Insight:**
-_________________________________________________________________
-_________________________________________________________________
+**Format:** Live coding — follow along in Google Colab
 
 ---
 
-**Dataset 2: Weekly Engagement Rate**
-```
-Week 1: 5.2%  |  Week 2: 5.8%  |  Week 3: 6.7%
-Week 4: 8.1%  |  Week 5: 10.4% |  Week 6: 13.8%
+### Setting Up Google Cloud
+
+**Step-by-step checklist — check off as you complete each:**
+
+- [ ] Opened [console.cloud.google.com](https://console.cloud.google.com)
+- [ ] Created new project named: `YouTube-Analytics-Workshop`
+- [ ] Enabled **YouTube Data API v3**
+- [ ] Generated API key
+- [ ] Copied API key to a secure note
+
+**My API Key (last 4 characters only — do not write the full key here):**
+
+Ends in: `__ __ __ __`
+
+> ⚠️ **Security rule:** Never share your full API key. Never paste it into a public document. For this workshop, store it only in your Colab notebook.
+
+---
+
+### Code Cell 1: Install Library
+
+*Write what this command does:*
+
+```python
+!pip install google-api-python-client --quiet
 ```
 
-**Trend Type:** _____________________
+**This installs:** ________________________________________________________________
 
-**My Reasoning:**
-_________________________________________________________________
-_________________________________________________________________
-
-**Insight:**
-_________________________________________________________________
-_________________________________________________________________
+**Why do we need `--quiet`?** _____________________________________________________
 
 ---
 
-**Dataset 3: Quarterly Reach**
-```
-Q1 (Year 1): 50,000  |  Q2: 65,000
-Q3: 45,000           |  Q4: 60,000
-Q1 (Year 2): 48,000  |  Q2: 68,000
-```
+### Code Cell 2: Import Libraries
 
-**Trend Type:** _____________________
+*As the instructor types, note what each import is for:*
 
-**My Reasoning:**
-_________________________________________________________________
-_________________________________________________________________
-
-**Insight:**
-_________________________________________________________________
-_________________________________________________________________
+| Library | What It Does in This Project |
+|---|---|
+| `googleapiclient.discovery` | |
+| `pandas` | |
+| `re` | |
+| `warnings` | |
 
 ---
 
-#### Comparative Analysis
+### Code Cell 3: API Connection
 
-**Types of Comparisons:**
+*Complete the blank — what goes inside `build()`?*
 
-1. **Time Comparisons**
-   - Example: _________________________________________________
+```python
+API_KEY = "_________________________________"   # your key here
 
-2. **Content Type Comparisons**
-   - Example: _________________________________________________
-
-3. **Competitor Comparisons**
-   - Example: _________________________________________________
-
-4. **Platform Comparisons**
-   - Example: _________________________________________________
-
----
-
-#### Activity: Coffee Shop Comparison
-
-**Data:**
-
-| Account  | Followers | Avg. Likes | Avg. Comments | Avg. Shares | Avg. Reach |
-|----------|-----------|------------|---------------|-------------|------------|
-| Coffee A | 25,000    | 800        | 40            | 15          | 12,000     |
-| Coffee B | 15,000    | 750        | 60            | 25          | 10,000     |
-| Coffee C | 35,000    | 900        | 30            | 10          | 18,000     |
-
-**My Calculations:**
-
-**Coffee A:**
-- Total Engagements: _____ + _____ + _____ = _____
-- Engagement Rate: (_____ / _____) × 100 = _____%
-- Per 1K Followers: (_____ / _____) × 1,000 = _____
-
-**Coffee B:**
-- Total Engagements: _____ + _____ + _____ = _____
-- Engagement Rate: (_____ / _____) × 100 = _____%
-- Per 1K Followers: (_____ / _____) × 1,000 = _____
-
-**Coffee C:**
-- Total Engagements: _____ + _____ + _____ = _____
-- Engagement Rate: (_____ / _____) × 100 = _____%
-- Per 1K Followers: (_____ / _____) × 1,000 = _____
-
-**Rankings:**
-
-By Engagement Rate:
-1. _____________
-2. _____________
-3. _____________
-
-By Per 1K Followers:
-1. _____________
-2. _____________
-3. _____________
-
-**Winner:** _____________
-
-**Why they won:**
-_________________________________________________________________
-_________________________________________________________________
-
-**Key Insight:**
-_________________________________________________________________
-_________________________________________________________________
-
----
-
-#### Pattern Recognition
-
-**Common Patterns to Look For:**
-
-1. **Time-of-Day Patterns**
-   - Example: _________________________________________________
-
-2. **Day-of-Week Patterns**
-   - Example: _________________________________________________
-
-3. **Content Patterns**
-   - Example: _________________________________________________
-
-4. **Hashtag Patterns**
-   - Example: _________________________________________________
-
-5. **Caption Length Patterns**
-   - Example: _________________________________________________
-
-**My Observations:**
-What patterns have I noticed in social media I follow?
-_________________________________________________________________
-_________________________________________________________________
-_________________________________________________________________
-
----
-
-### ☕ BREAK (11:00-11:15 AM)
-
----
-
-### 💬 SECTION 2: Engagement & Sentiment Analysis (11:15 AM-12:00 PM)
-
----
-
-#### Engagement Hierarchy
-
-**Fill in the pyramid (highest to lowest value):**
-
-```
-        ↑ HIGHEST VALUE
-        
-        _____________________
-        
-        _____________________
-        
-        _____________________
-        
-        _____________________
-        
-        _____________________
-        
-        ↓ LOWEST VALUE
+youtube = build( _____________ , _____________ , developerKey=API_KEY)
 ```
 
-**Why does hierarchy matter?**
-_________________________________________________________________
-_________________________________________________________________
+**Test output you should see:**
+
+________________________________________________________________________________
+
+**If you see an error instead, write it here:**
+
+________________________________________________________________________________
+
+**What the error probably means:**
+
+________________________________________________________________________________
 
 ---
 
-#### Engagement Quality
+### Concept Check: How the YouTube API Works
 
-**Comment Depth:**
+*Label each step in the diagram:*
 
-Low Quality Example: _________________________________________________
-
-High Quality Example: _________________________________________________
-
-**Response Rate:**
-- Brands replying get _____ more engagement
-
-**Share Context:**
-- Share with comment = _____________ value
-- Silent share = _____________ value
-
-**Save Intent:**
-- People save when: _________________________________________________
-
----
-
-#### Weighted Engagement
-
-**Standard Formula:**
 ```
-Total Engagement = _________ + _________ + _________
+Your Code  →  ____________  →  YouTube Servers  →  JSON Response  →  pandas DataFrame
 ```
 
-**Weighted Formula:**
-```
-Weighted = (Likes × ___) + (Comments × ___) + (Shares × ___)
-```
+**What is JSON?**
 
-**Practice Calculation:**
+________________________________________________________________________________
 
-Post has: 100 likes, 20 comments, 5 shares
+**What does "pagination" mean?**
 
-**Standard:**
-_____ + _____ + _____ = _____
-
-**Weighted:**
-(100 × ___) + (20 × ___) + (5 × ___) = _____
-
-**Difference:** _____% more valuable when weighted!
+________________________________________________________________________________
 
 ---
 
-#### Sentiment Analysis
+### Code Cell 4: Get Video IDs
 
-**What is it?**
-_________________________________________________________________
-_________________________________________________________________
+*As the instructor explains the `get_channel_video_ids()` function, answer:*
 
-**Three Categories:**
+**What is an "uploads playlist"?**
 
-1. 😊 **Positive:**
-   - Example: _________________________________________________
+________________________________________________________________________________
 
-2. 😐 **Neutral:**
-   - Example: _________________________________________________
+**Why does the API only return 50 results per request?**
 
-3. 😢 **Negative:**
-   - Example: _________________________________________________
+________________________________________________________________________________
 
----
+**What does `next_page_token` do?**
 
-**Why Sentiment Matters:**
+________________________________________________________________________________
 
-1. **Brand Health Monitoring**
-   - _____________________________________________________________
+**Channel ID you are using today:**
 
-2. **Campaign Effectiveness**
-   - _____________________________________________________________
+`UC______________________________________________`
 
-3. **Customer Service**
-   - _____________________________________________________________
-
-4. **Product Feedback**
-   - _____________________________________________________________
+**Number of video IDs collected:** __________
 
 ---
 
-#### Activity: Score These Comments
+### Code Cell 5: Get Video Statistics
 
-**Instructions:** Mark each as P (Positive), N (Neutral), or NEG (Negative)
+*The `get_video_statistics()` function fetches 3 types of data. Label each:*
 
-1. ___ "Just ordered! Can't wait to try this! 😍"
+| API Part | Data It Returns | Examples |
+|---|---|---|
+| `snippet` | | title, published_at, |
+| `statistics` | | view_count, |
+| `contentDetails` | | |
 
-2. ___ "My skin has never looked better since using this"
+**Why do we use `.get("viewCount", 0)` instead of just `["viewCount"]`?**
 
-3. ___ "How much does it cost?"
+________________________________________________________________________________
 
-4. ___ "Disappointed. Caused me to break out 😞"
+________________________________________________________________________________
 
-5. ___ "Is this suitable for sensitive skin?"
+**After running — record your raw DataFrame details:**
 
-6. ___ "Waste of money. Didn't do anything for me."
+Shape (rows × columns): ______________ × ______________
 
-7. ___ "Love the packaging!"
+Column names (list a few):
 
-8. ___ "Still waiting for my order from 2 weeks ago..."
+________________________________________________________________________________
 
-9. ___ "When will this be back in stock?"
+**Preview — top 3 video titles in your raw data:**
 
-10. ___ "Best moisturizer I've EVER used! 10/10"
+1. ___________________________________________________________________________
 
-11. ___ "Meh, it's okay I guess"
+2. ___________________________________________________________________________
 
-12. ___ "Your customer service was amazing when I had an issue"
-
-13. ___ "Why is this so expensive for such a small bottle?"
-
-14. ___ "Does this contain retinol?"
-
-15. ___ "Game changer! My dry skin is finally happy"
-
-16. ___ "Not worth the hype IMO"
-
-17. ___ "Smells amazing and works great"
-
-18. ___ "I prefer your old formula to be honest"
-
-19. ___ "Will this work on mature skin?"
-
-20. ___ "Absolutely love this brand! Never disappointed"
+3. ___________________________________________________________________________
 
 ---
 
-**My Count:**
-- Positive: _____
-- Neutral: _____
-- Negative: _____
-- Total: _____ (should be 20)
+### Session 2 Reflection
 
-**Calculate Sentiment Score:**
+**One thing about APIs that surprised you:**
 
-Formula:
-```
-Sentiment Score = (Positive - Negative) / Total × 100
-```
+________________________________________________________________________________
 
-My Calculation:
-```
-= (_____ - _____) / _____ × 100
-= _____ / 20 × 100
-= _____
+________________________________________________________________________________
+
+**One question you still have:**
+
+________________________________________________________________________________
+
+---
+
+## 🧹 Session 3: Data Cleaning & Feature Engineering (11:00–11:40 AM)
+
+**Format:** Live coding
+
+---
+
+### Why Cleaning Matters
+
+*In your own words, explain "garbage in, garbage out":*
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+**What does "data type" mean in Python? Give two examples:**
+
+1. ___________________________________________________________________________
+
+2. ___________________________________________________________________________
+
+---
+
+### Code Cell 6: Convert Numeric Types
+
+*Fill in the blanks based on what the instructor types:*
+
+```python
+df_clean = df_raw.____________()   # Always work on a ____________!
+
+df_clean["view_count"] = pd.to_numeric(
+    df_clean["view_count"], errors="____________"
+).fillna(____________).astype(____________)
 ```
 
-**My Sentiment Score: _____**
+**What does `errors="coerce"` do?**
 
-**What does this mean?**
+________________________________________________________________________________
 
-| Score Range | Classification |
-|-------------|---------------|
-| +50 to +100 | Very Positive |
-| +10 to +50  | Positive |
-| -10 to +10  | Neutral/Mixed |
-| -50 to -10  | Negative |
-| -100 to -50 | Very Negative |
+**What does `.fillna(0)` do?**
 
-**Interpretation:**
-_________________________________________________________________
-_________________________________________________________________
+________________________________________________________________________________
 
-**Action Items:**
-_________________________________________________________________
-_________________________________________________________________
+**Why do we use `.astype(int)` at the end?**
+
+________________________________________________________________________________
+
+**Before / After comparison — write the data type for `view_count`:**
+
+Before cleaning: ______________ | After cleaning: ______________
 
 ---
 
-### 🍽️ LUNCH BREAK (12:00-1:30 PM)
+### Code Cell 7: Parse Dates
+
+*The API returns dates as strings, e.g.: `"2023-04-15T14:30:00Z"`*
+
+**After `pd.to_datetime()`, we can extract:**
+
+| Feature Created | Code Used | What It Gives Us |
+|---|---|---|
+| `publish_year` | `.dt.year` | |
+| `publish_month` | | |
+| `publish_month_name` | `.dt.strftime("%b")` | |
+| `publish_day_of_week` | | |
+| `publish_quarter` | | |
+
+**Why do we want the day of the week as a feature?**
+
+________________________________________________________________________________
 
 ---
 
-## 🌆 AFTERNOON SESSION
+### Code Cell 8: Parse Video Duration
 
-### 📊 SECTION 3: Data Visualization Fundamentals (1:30-2:30 PM)
+*The API returns duration as ISO 8601 format, e.g.: `"PT5M30S"`*
 
----
+**Decode each example:**
 
-#### Why Visualize Data?
+| API Duration String | Hours | Minutes | Seconds | Total Seconds |
+|---|---|---|---|---|
+| `PT5M30S` | 0 | 5 | 30 | |
+| `PT1H2M15S` | | | | |
+| `PT45S` | | | | |
+| `PT12M` | | | 0 | |
 
-**The human brain processes images _____________ faster than text.**
+**What does the `?` symbol do in a regular expression pattern?**
 
-**Four Benefits:**
+________________________________________________________________________________
 
-1. **Pattern Recognition**
-   - _____________________________________________________________
+**After running — what is the average video duration in your dataset?**
 
-2. **Communication**
-   - _____________________________________________________________
-
-3. **Decision Making**
-   - _____________________________________________________________
-
-4. **Engagement**
-   - _____________________________________________________________
+Average duration: __________ minutes
 
 ---
 
-#### Chart Types
+### Code Cell 9: Calculate Engagement Metrics
 
-Complete the chart type reference:
-
-**1. LINE CHART**
-- Use for: _____________________________________________________
-- Example: _____________________________________________________
-- When: _____________________________________________________
-
-**2. BAR CHART**
-- Use for: _____________________________________________________
-- Example: _____________________________________________________
-- When: _____________________________________________________
-
-**3. PIE CHART**
-- Use for: _____________________________________________________
-- Example: _____________________________________________________
-- When: _____________________________________________________
-- ⚠️ Caution: _____________________________________________________
-
-**4. SCATTER PLOT**
-- Use for: _____________________________________________________
-- Example: _____________________________________________________
-- When: _____________________________________________________
-
-**5. HEATMAP**
-- Use for: _____________________________________________________
-- Example: _____________________________________________________
-- When: _____________________________________________________
-
-**6. AREA CHART**
-- Use for: _____________________________________________________
-- Example: _____________________________________________________
-- When: _____________________________________________________
-
----
-
-#### Quick Reference Guide
-
-Fill in the best chart type:
-
-| Question Type | Chart Type |
-|---------------|------------|
-| Trend over time | _____________ |
-| Compare categories | _____________ |
-| Show proportion | _____________ |
-| Find correlation | _____________ |
-| Time patterns (day × hour) | _____________ |
-| Volume over time | _____________ |
-
----
-
-#### Activity: Chart Matching
-
-Match each scenario to the best chart type:
-
-**Scenario 1:** Track Instagram followers Jan-Jun  
-**Best Chart:** _____________________
-
-**Scenario 2:** Compare engagement across 4 platforms  
-**Best Chart:** _____________________
-
-**Scenario 3:** Show age distribution (4 groups, percentages add to 100%)  
-**Best Chart:** _____________________
-
-**Scenario 4:** Determine if more posts = more engagement  
-**Best Chart:** _____________________
-
-**Scenario 5:** Find best day and time to post  
-**Best Chart:** _____________________
-
----
-
-#### Design Principles
-
-**Principle 1: Clarity Above All**
-- Can someone understand in _____ seconds?
-- If not: _____________________________________________________
-
-**Principle 2: Data-Ink Ratio**
-- Maximize: _____________________________________________________
-- Remove: _____________________________________________________
-
-**Principle 3: Color with Purpose**
-
-✅ DO:
-- _____________________________________________________________
-- _____________________________________________________________
-
-❌ DON'T:
-- _____________________________________________________________
-- _____________________________________________________________
-
-**Principle 4: Honest Scales**
-
-✅ DO:
-- _____________________________________________________________
-- _____________________________________________________________
-
-❌ DON'T:
-- _____________________________________________________________
-- _____________________________________________________________
-
-**Principle 5: Add Context**
-- Add: _____________________________________________________
-- Note: _____________________________________________________
-
----
-
-#### Common Mistakes
-
-**Top 5 Mistakes I'll Avoid:**
-
-1. _____________________________________________________________
-
-2. _____________________________________________________________
-
-3. _____________________________________________________________
-
-4. _____________________________________________________________
-
-5. _____________________________________________________________
-
----
-
-### ☕ BREAK (2:30-2:45 PM)
-
----
-
-### 💻 SECTION 4: Creating Dashboards (2:45-3:45 PM)
-
----
-
-#### What is a Dashboard?
-
-**Definition:**
-_________________________________________________________________
-_________________________________________________________________
-
-**Dashboard vs. Report:**
-
-| Dashboard | Report |
-|-----------|--------|
-| ___________ | ___________ |
-| ___________ | ___________ |
-| ___________ | ___________ |
-
----
-
-#### Good Dashboard Characteristics
-
-**1. Clear Hierarchy**
-- _____________________________________________________________
-
-**2. Logical Grouping**
-- _____________________________________________________________
-
-**3. Consistent Layout**
-- _____________________________________________________________
-
-**4. White Space**
-- _____________________________________________________________
-
-**5. Interactive Elements**
-- _____________________________________________________________
-
----
-
-#### Dashboard Build Checklist
-
-As I build, I'll check off each step:
-
-**Step 1: Setup**
-- [ ] Template file open
-- [ ] Can see all tabs (Data, Dashboard, Calculations)
-- [ ] Ready to build!
-
-**Step 2: Create Metric Cards**
-- [ ] Total Followers (Cell B2-B3)
-- [ ] Engagement Rate (Cell D2-D3)
-- [ ] Total Reach (Cell F2-F3)
-- [ ] Posts This Month (Cell H2-H3)
-- [ ] All formulas working
-
-**Step 3: Format Cards**
-- [ ] Borders added
-- [ ] Values bold and large (18pt)
-- [ ] Background colors added
-- [ ] Centered and aligned
-
-**Step 4: Trend Chart**
-- [ ] Date and Engagement selected
-- [ ] Line chart inserted
-- [ ] Title added: "Engagement Rate Trend - Last 30 Days"
-- [ ] Axes labeled
-- [ ] Positioned below metrics
-
-**Step 5: Comparison Chart**
-- [ ] Content type table created
-- [ ] Bar chart inserted
-- [ ] Bars sorted (highest to lowest)
-- [ ] Winner highlighted (different color)
-- [ ] Title added: "Engagement by Content Type"
-
-**Step 6: Conditional Formatting**
-- [ ] Engagement column selected
-- [ ] Color scale applied (Green-Yellow-Red)
-- [ ] OR rules created (High/Med/Low)
-
-**Step 7: Final Polish**
-- [ ] Dashboard title added
-- [ ] Date updated
-- [ ] My name added
-- [ ] Elements aligned
-- [ ] Gridlines removed
-- [ ] Looks professional!
-
----
-
-#### My Dashboard Notes
-
-**Formulas I Used:**
-
-Total Followers:
-```
-=_____________________
-```
-
-Engagement Rate:
-```
-=_____________________
-```
-
-Total Reach:
-```
-=_____________________
-```
-
-Posts Count:
-```
-=_____________________
-```
-
-**Challenges I Faced:**
-_________________________________________________________________
-_________________________________________________________________
-
-**How I Solved Them:**
-_________________________________________________________________
-_________________________________________________________________
-
-**What I'm Proud Of:**
-_________________________________________________________________
-_________________________________________________________________
-
----
-
-### 🏆 SECTION 5: Team Dashboard Challenge (3:45-4:15 PM)
-
----
-
-#### The Challenge
-
-**Scenario:**  
-FitLife Gym needs a dashboard for their board meeting.
-
-**Requirements:**
-1. _____________________________________________________________
-2. _____________________________________________________________
-3. _____________________________________________________________
-4. _____________________________________________________________
-
-**My Team:**
-- Name: ___________________________ Role: ___________________
-- Name: ___________________________ Role: ___________________
-- Name: ___________________________ Role: ___________________
-- Name: ___________________________ Role: ___________________
-
-**My Role:** _____________________
-
----
-
-#### Work Plan
-
-**What I'll focus on (based on my role):**
-_________________________________________________________________
-_________________________________________________________________
-
-**Time Management:**
-- 0-5 min: _____________________________________________________
-- 5-10 min: _____________________________________________________
-- 10-15 min: _____________________________________________________
-- 15-20 min: _____________________________________________________
-
----
-
-#### Key Insights We Found
-
-**Insight 1:**
-_________________________________________________________________
-_________________________________________________________________
-
-**Supporting Data:**
-_________________________________________________________________
-
-**Insight 2:**
-_________________________________________________________________
-_________________________________________________________________
-
-**Supporting Data:**
-_________________________________________________________________
-
-**Insight 3:**
-_________________________________________________________________
-_________________________________________________________________
-
-**Supporting Data:**
-_________________________________________________________________
-
----
-
-#### Our Recommendation
-
-**What should FitLife do next month?**
-_________________________________________________________________
-_________________________________________________________________
-_________________________________________________________________
-
-**Why this recommendation?**
-_________________________________________________________________
-_________________________________________________________________
-
-**Expected outcome:**
-_________________________________________________________________
-_________________________________________________________________
-
----
-
-#### Presentation Notes
-
-**What I'll say (if I'm presenter):**
-
-**Opening (30 sec):**
-_________________________________________________________________
-_________________________________________________________________
-
-**Key Insight (30 sec):**
-_________________________________________________________________
-_________________________________________________________________
-
-**Recommendation (30 sec):**
-_________________________________________________________________
-_________________________________________________________________
-
-**Closing:**
-_________________________________________________________________
-
----
-
-### 📝 SECTION 6: Day 2 Review (4:15-4:30 PM)
-
----
-
-#### Self-Assessment
-
-Rate your understanding (1=need help, 5=confident):
-
-| Topic | Rating (1-5) |
-|-------|-------------|
-| Trend Analysis | _____ |
-| Comparative Analysis | _____ |
-| Sentiment Analysis | _____ |
-| Chart Selection | _____ |
-| Visualization Design | _____ |
-| Dashboard Building | _____ |
-
-**What I learned best today:**
-_________________________________________________________________
-_________________________________________________________________
-
-**What I need to review:**
-_________________________________________________________________
-_________________________________________________________________
-
----
-
-#### Quick Quiz
-
-Answer these to check understanding:
-
-**1. What type of trend shows accelerating growth?**
-_________________________________________________________________
-
-**2. Most valuable engagement type is:**
-_________________________________________________________________
-
-**3. Sentiment score formula:**
-```
-= (_________ - _________) / _________ × 100
-```
-
-**4. Best chart for trends over time:**
-_________________________________________________________________
-
-**5. A sentiment score of +10 means:**
-_________________________________________________________________
-
-**6. Best use for pie chart:**
-_________________________________________________________________
-
-**7. Problem with 3D charts:**
-_________________________________________________________________
-
-**8. Engagement rate formula:**
-```
-= (_________ / _________) × 100
-```
-
-**9. Most important metric goes where on dashboard:**
-_________________________________________________________________
-
-**10. Scatter plot shows:**
-_________________________________________________________________
-
----
-
-#### Reflections
-
-**Best moment of Day 2:**
-_________________________________________________________________
-_________________________________________________________________
-
-**Most challenging part:**
-_________________________________________________________________
-_________________________________________________________________
-
-**How I overcame it:**
-_________________________________________________________________
-_________________________________________________________________
-
-**One thing I'll use immediately:**
-_________________________________________________________________
-_________________________________________________________________
-
-**Questions I still have:**
-_________________________________________________________________
-_________________________________________________________________
-
----
-
-#### Day 3 Preview
-
-**Tomorrow we'll cover:**
-- ✓ _____________________________________________________________
-- ✓ _____________________________________________________________
-- ✓ _____________________________________________________________
-- ✓ _____________________________________________________________
-- ✓ _____________________________________________________________
-
-**How I'll prepare:**
-_________________________________________________________________
-_________________________________________________________________
-
----
-
-## 📸 Portfolio Piece
-
-**My Dashboard Screenshot:**
-
-[Paste or attach your dashboard screenshot here]
-
-**Brief Description (for my portfolio/resume):**
-_________________________________________________________________
-_________________________________________________________________
-_________________________________________________________________
-
----
-
-## 🎯 Action Items
-
-**Before Day 3:**
-- [ ] Review any concepts I struggled with
-- [ ] Complete optional homework (personal dashboard)
-- [ ] Bring questions for Day 3
-- [ ] Practice presenting data insights
-
-**Optional Homework:**
-Build a dashboard for my personal social media account or a brand I follow. Bring to Day 3 to share!
-
----
-
-## 📊 Key Formulas Reference
-
-**Keep this handy!**
+*Write the formulas from memory after the instructor explains them:*
 
 **Engagement Rate:**
+
 ```
-= (Total Engagements / Reach) × 100
+Engagement Rate = ( ______________ + ______________ ) / ______________
 ```
 
-**Engagement per 1K Followers:**
+**Like Ratio:**
+
 ```
-= (Total Engagements / Followers) × 1,000
+Like Ratio = ______________ / ______________
 ```
 
-**Sentiment Score:**
+**Comment Ratio:**
+
 ```
-= (Positive - Negative) / Total × 100
+Comment Ratio = ______________ / ______________
 ```
 
-**Weighted Engagement:**
+**Why do we use `.replace(0, 1)` before dividing?**
+
+________________________________________________________________________________
+
+**Why is engagement rate more useful than raw like count?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+**After running — record your dataset's engagement stats:**
+
+| Metric | Your Dataset Value |
+|---|---|
+| Average engagement rate | % |
+| Highest engagement rate | % |
+| Lowest engagement rate | % |
+
+---
+
+### Code Cell 10: Duration Categories
+
+*`pd.cut()` groups continuous numbers into labelled buckets.*
+
+**Complete the category labels from the instructor's code:**
+
+| Duration Range | Category Label |
+|---|---|
+| 0 – 5 minutes | |
+| 5 – 10 minutes | |
+| 10 – 20 minutes | |
+| 20 – 60 minutes | |
+| 60+ minutes | |
+
+**Duration distribution in your dataset:**
+
+| Category | Count |
+|---|---|
+| Short (< 5 min) | |
+| Medium (5–10 min) | |
+| Long (10–20 min) | |
+| Extended (20–60 min) | |
+| Marathon (60+ min) | |
+
+---
+
+### Code Cell 11: Data Quality Report
+
+*Record the output from your data quality report:*
+
+Total videos: ______________
+
+Date range: ______________ → ______________
+
+Missing values in any column? ☐ Yes   ☐ No
+
+If yes, which column? _________________________________________
+
+Average engagement rate: ______________%
+
+---
+
+### Feature Engineering Summary
+
+*Check the features you successfully created:*
+
+- [ ] `view_count` (integer)
+- [ ] `like_count` (integer)
+- [ ] `comment_count` (integer)
+- [ ] `published_at` (datetime)
+- [ ] `publish_year`, `publish_month`, `publish_day_of_week`
+- [ ] `duration_seconds`, `duration_minutes`
+- [ ] `engagement_rate`
+- [ ] `like_ratio`, `comment_ratio`
+- [ ] `tag_count`
+- [ ] `duration_category`
+
+---
+
+### Session 3 Concept Check
+
+**1. What is "feature engineering"? Give one example from today:**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+**2. If a video has 50,000 views, 2,500 likes, and 300 comments — calculate its engagement rate:**
+
 ```
-= (Likes × 1) + (Comments × 3) + (Shares × 5)
+Engagement Rate = ( _______ + _______ ) / _______ = _______
+                = _______ × 100 = _______  %
 ```
 
-**Growth Rate:**
+**3. Why should you always work on `df_raw.copy()` instead of `df_raw` directly?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+---
+
+## 🔍 Session 4: Quick Data Inspection (11:40 AM–12:00 PM)
+
+**Format:** Coding + Discussion
+
+---
+
+### Code Cell 12: Descriptive Statistics (`.describe()`)
+
+*Record key values from your `.describe()` output:*
+
+| Statistic | `view_count` | `engagement_rate` | `duration_minutes` |
+|---|---|---|---|
+| mean | | | |
+| median (50%) | | | |
+| min | | | |
+| max | | | |
+| std | | | |
+
+**If mean views >> median views, what does that tell us?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+---
+
+### Code Cell 13: Top 5 Most Viewed Videos
+
+*Write the titles and key stats of your top 5:*
+
+| Rank | Video Title (first 40 chars) | Views | Engagement Rate |
+|---|---|---|---|
+| 1 | | | % |
+| 2 | | | % |
+| 3 | | | % |
+| 4 | | | % |
+| 5 | | | % |
+
+**Is the most viewed video also the most engaging?**  ☐ Yes   ☐ No
+
+**What does that tell us?**
+
+________________________________________________________________________________
+
+---
+
+### Code Cell 14: Correlation Matrix
+
+*Record the correlation between each pair (from your output):*
+
+| Pair | Correlation | Strong / Weak / None? |
+|---|---|---|
+| views ↔ likes | | |
+| views ↔ engagement_rate | | |
+| views ↔ duration_minutes | | |
+| engagement_rate ↔ duration_minutes | | |
+
+**Correlation reminder:**
+
+- `1.0` = perfect positive relationship
+- `0.0` = no relationship
+- `-1.0` = perfect inverse relationship
+
+**Which correlation surprised you most?**
+
+________________________________________________________________________________
+
+**What does it mean in practice?**
+
+________________________________________________________________________________
+
+---
+
+### Code Cell 15: First Quick Chart
+
+*Sketch or describe the chart you see:*
+
 ```
-= (New Value - Old Value) / Old Value × 100
+[Draw or describe your bar chart here]
+
+
+
+
+```
+
+**One observation from this chart:**
+
+________________________________________________________________________________
+
+---
+
+### Pre-Lunch Discussion
+
+*Answer these before lunch:*
+
+**Which of the 5 business questions can you already partially answer from what you've seen?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+**One question you want to investigate after lunch:**
+
+________________________________________________________________________________
+
+---
+
+## 🍽️ LUNCH BREAK (12:00–1:30 PM)
+
+*Before you go:*
+- [ ] Saved your Colab notebook (File → Save a copy in Drive)
+- [ ] Noted your DataFrame shape: ______________ rows × ______________ columns
+
+---
+
+## 🌆 AFTERNOON SESSION (1:30–4:30 PM)
+
+### Theme: Analysis, Visualization & Reporting
+
+---
+
+## 📊 Session 5: Exploratory Data Analysis (1:30–2:15 PM)
+
+**Format:** Live coding — 6 charts
+
+---
+
+### Chart Selection Guide
+
+*Fill in as the instructor introduces each chart type:*
+
+| Chart Type | Best Used For | Today's Example |
+|---|---|---|
+| Horizontal bar | | Top 10 videos |
+| Line chart | | |
+| Scatter plot | | |
+| Histogram | | |
+
+---
+
+### Code Cell 16: Style Configuration
+
+**Why configure styles globally instead of per chart?**
+
+________________________________________________________________________________
+
+---
+
+### Chart 1: Top 10 Most Viewed Videos
+
+**Business question this answers:**
+
+________________________________________________________________________________
+
+*Record your top 3 from the chart:*
+
+1. ___________________________________________________________________________
+   Views: ______________
+
+2. ___________________________________________________________________________
+   Views: ______________
+
+3. ___________________________________________________________________________
+   Views: ______________
+
+**Design choice note — why horizontal bars instead of vertical?**
+
+________________________________________________________________________________
+
+---
+
+### Chart 2: Top 10 Highest Engagement Rate
+
+**Business question this answers:**
+
+________________________________________________________________________________
+
+**Are these the same videos as Chart 1?**  ☐ Mostly yes   ☐ Mostly no   ☐ Completely different
+
+**What does it mean if the two lists are different?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+*Your top 3 by engagement rate:*
+
+1. ___________________________________________________________________________
+   Engagement: ______________%
+
+2. ___________________________________________________________________________
+   Engagement: ______________%
+
+3. ___________________________________________________________________________
+   Engagement: ______________%
+
+---
+
+### Chart 3: Upload Frequency Over Time
+
+**Business question this answers:**
+
+________________________________________________________________________________
+
+**Describe the pattern you see (consistent / spiky / declining / growing):**
+
+________________________________________________________________________________
+
+**Were there any months with zero uploads? If so, when?**
+
+________________________________________________________________________________
+
+**What could cause a gap in uploads?**
+
+________________________________________________________________________________
+
+---
+
+### Chart 4: Monthly Average Views Trend
+
+**Business question this answers:**
+
+________________________________________________________________________________
+
+**Is the channel's reach:**  ☐ Growing   ☐ Declining   ☐ Flat   ☐ Inconsistent
+
+**What is the most recent month's average views?**
+
+________________________________________________________________________________
+
+**Describe any notable spike or drop and when it happened:**
+
+________________________________________________________________________________
+
+---
+
+### Chart 5: Views vs. Engagement Rate (Scatter Plot)
+
+**Business question this answers:**
+
+________________________________________________________________________________
+
+**In a scatter plot, what does each dot represent?**
+
+________________________________________________________________________________
+
+**What does the color (3rd variable) represent in this chart?**
+
+________________________________________________________________________________
+
+**Describe the overall pattern you see:**
+
+☐ Strong positive trend (high views = high engagement)
+☐ Strong negative trend (high views = low engagement)
+☐ No clear pattern (scattered randomly)
+☐ Clusters — describe: ___________________________________________________
+
+**Analyst insight from Chart 5:**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+---
+
+### Chart 6: Engagement Rate Distribution (Histogram)
+
+**Business question this answers:**
+
+________________________________________________________________________________
+
+**Record your channel's statistics:**
+
+Mean engagement rate: ______________%
+
+Median engagement rate: ______________%
+
+**Is mean > median or mean < median?** ______________
+
+**What does this tell us about the distribution?**
+
+________________________________________________________________________________
+
+**What range covers most of your videos? (eyeball estimate)**
+
+Between _______% and _______% engagement rate
+
+---
+
+### Session 5 Chart Summary
+
+*Rate each chart on how clearly it answers its business question (1 = unclear, 5 = very clear):*
+
+| Chart | Business Question Answered | Clarity (1–5) |
+|---|---|---|
+| Chart 1: Top 10 Views | | |
+| Chart 2: Top 10 Engagement | | |
+| Chart 3: Upload Frequency | | |
+| Chart 4: Monthly Avg Views | | |
+| Chart 5: Scatter | | |
+| Chart 6: Distribution | | |
+
+**Which single chart would you show first to a YouTube channel manager? Why?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+---
+
+## 🧠 Session 6: Deeper Insight Generation (2:15–3:00 PM)
+
+**Format:** Live coding + Discussion
+
+---
+
+### The Shift: Descriptive → Diagnostic
+
+*Fill in the blanks:*
+
+- **Descriptive analytics** asks: "What ______________ ?"
+- **Diagnostic analytics** asks: "Why ______________ ?"
+
+---
+
+### Chart 7: Correlation Heatmap
+
+**How to read the heatmap:**
+
+- Dark green cell = _____________________ (strong _________________ relationship)
+- Dark red cell = _____________________ (strong _________________ relationship)
+- Near-white cell = _____________________
+
+*Record the 3 most interesting correlations from your heatmap:*
+
+| Variables | Correlation Value | What It Means |
+|---|---|---|
+| | | |
+| | | |
+| | | |
+
+**Important reminder — what is the difference between correlation and causation?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+**Example: "Videos with more tags get more views" — could this correlation be caused by something else?**
+
+________________________________________________________________________________
+
+---
+
+### Chart 8: Performance by Day of Week
+
+**Why do we highlight weekends with a different color?**
+
+________________________________________________________________________________
+
+**Why is the `n=` label on each bar important?**
+
+________________________________________________________________________________
+
+*Record your findings:*
+
+| Day | Avg Views | Avg Engagement (%) | Sample Size (n) |
+|---|---|---|---|
+| Monday | | | |
+| Tuesday | | | |
+| Wednesday | | | |
+| Thursday | | | |
+| Friday | | | |
+| Saturday | | | |
+| Sunday | | | |
+
+**Best day for average views:** ______________
+
+**Best day for average engagement:** ______________
+
+**Are these the same day?**  ☐ Yes   ☐ No
+
+**If not — what strategy does this suggest?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+**Caution: If the best-performing day only has n=2 or n=3, should you trust that result? Why or why not?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+---
+
+### Chart 9: Engagement Rate by Video Duration
+
+*Record your findings:*
+
+| Duration Category | Avg Engagement Rate | Count (n) |
+|---|---|---|
+| Short (< 5 min) | % | |
+| Medium (5–10 min) | % | |
+| Long (10–20 min) | % | |
+| Extended (20–60 min) | % | |
+| Marathon (60+ min) | % | |
+
+**Which duration category has the highest engagement?** ______________
+
+**Which has the lowest?** ______________
+
+**Does this mean the channel should only make videos in the top-performing category?**
+
+☐ Yes, definitely   ☐ No — explain why:
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+---
+
+### Chart 10: Upload Consistency vs. Average Views
+
+**What is a "dual-axis" chart?**
+
+________________________________________________________________________________
+
+**What does the bar height show?** __________________ per month
+
+**What does the line show?** __________________ per video
+
+**Do months with more uploads show higher or lower average views per video?**
+
+☐ Higher (more uploads = more views per video)
+☐ Lower (more uploads = fewer views per video)
+☐ No clear relationship
+
+**What could explain this pattern?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+---
+
+### Diagnostic Insight Synthesis
+
+*Based on Sessions 5 and 6, answer the 5 business questions as best you can:*
+
+**Q1: Which videos drive the most engagement?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+**Q2: Does video length affect performance?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+**Q3: What upload patterns correlate with higher views?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+**Q4: Which day of the week performs best?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+**Q5: What content strategy should the channel pursue going forward?**
+
+*(Save this for Session 8 — you'll refine it after building the dashboard)*
+
+---
+
+## ☕ BREAK (3:00–3:15 PM)
+
+*Before break:*
+
+- [ ] Download your CSV: `youtube_analytics_final.csv`
+  - In Colab: Files panel (left sidebar) → right-click → Download
+- [ ] Confirm the file downloaded successfully
+
+**File downloaded?**  ☐ Yes   ☐ No — ask instructor for backup file
+
+---
+
+## 📈 Session 7: Dashboard Creation (3:15–4:00 PM)
+
+**Format:** Guided activity
+
+**Dashboard option you are building:**  ☐ Looker Studio (recommended)   ☐ Matplotlib
+
+---
+
+### What Makes a Good Dashboard?
+
+*Write the key principle for each point:*
+
+**Audience:** A dashboard is written for _________________, not for _________________.
+
+**Quantity:** _________________ great panels beats _________________ mediocre ones.
+
+**Top section:** Always put _________________ at the top for instant context.
+
+**Interactivity:** _________________ let your stakeholder explore without asking you.
+
+---
+
+### Option A: Matplotlib Dashboard
+
+*If building the Python dashboard, note which panels you included:*
+
+- [ ] Panel 1: ______________________________________________
+- [ ] Panel 2: ______________________________________________
+- [ ] Panel 3: ______________________________________________
+- [ ] Panel 4: ______________________________________________
+- [ ] Panel 5: ______________________________________________
+- [ ] KPI summary box
+
+**Dashboard saved as:** `dashboard_summary.png`  ☐ Confirmed
+
+---
+
+### Option B: Google Looker Studio Dashboard
+
+#### Step 1: Upload CSV to Google Sheets
+
+- [ ] Opened Google Sheets
+- [ ] Imported `youtube_analytics_final.csv` via File → Import
+- [ ] Data is visible in the sheet
+
+**Number of rows loaded:** ______________
+
+**Spreadsheet URL:** _____________________________________________________________
+
+#### Step 2: Connect to Looker Studio
+
+- [ ] Opened Looker Studio
+- [ ] Created blank report
+- [ ] Connected to Google Sheets data source
+- [ ] Data loaded correctly
+
+#### Step 3: Dashboard Elements
+
+*Check off each panel as you build it:*
+
+**KPI Scorecards:**
+- [ ] Total Views (Sum of view_count)
+- [ ] Total Likes (Sum of like_count)
+- [ ] Avg Engagement Rate (Avg of engagement_rate)
+- [ ] Optional: Total Comments
+
+**Charts:**
+- [ ] Time series chart — monthly views over time
+- [ ] Top videos table — title, views, engagement rate
+- [ ] Bar chart — engagement rate by day of week
+- [ ] Scatter chart — duration vs. engagement
+
+**Filters:**
+- [ ] Date range control
+- [ ] Duration category filter
+
+#### Dashboard Design Choices
+
+**Color theme you chose:** _________________________________________
+
+**Title of your dashboard:** _________________________________________
+
+**One thing you changed from the default to make it clearer:**
+
+________________________________________________________________________________
+
+#### Step 4: Share
+
+- [ ] Set access: "Anyone with the link → Viewer"
+- [ ] Copied share link
+
+**Dashboard link:** _____________________________________________________________
+
+---
+
+### Dashboard Peer Review
+
+*Swap dashboard links with a neighbor. Write one piece of feedback:*
+
+**Neighbor's name:** _____________________________
+
+**One thing they did well:**
+
+________________________________________________________________________________
+
+**One suggestion for improvement:**
+
+________________________________________________________________________________
+
+---
+
+## 🎤 Session 8: Insight Presentation & Recommendations (4:00–4:30 PM)
+
+**Format:** Individual writing → Volunteer presentations → Group debrief
+
+---
+
+### Your Executive Brief
+
+*You have 8 minutes to complete this. Write it for a YouTube channel manager — no jargon, no code, no charts. Plain, clear language.*
+
+---
+
+```
+╔═══════════════════════════════════════════════════════════════╗
+║              YOUTUBE CHANNEL PERFORMANCE BRIEF                ║
+╠═══════════════════════════════════════════════════════════════╣
+║                                                               ║
+║  Channel:          _______________________________________    ║
+║  Analysis Period:  _________________ → _________________     ║
+║  Videos Analyzed:  _____                                      ║
+║                                                               ║
+╠═══════════════════════════════════════════════════════════════╣
+║                                                               ║
+║  TOP FINDING 1:                                               ║
+║                                                               ║
+║  ____________________________________________________________  ║
+║  ____________________________________________________________  ║
+║  Supporting data: _________________________________________   ║
+║                                                               ║
+╠═══════════════════════════════════════════════════════════════╣
+║                                                               ║
+║  TOP FINDING 2:                                               ║
+║                                                               ║
+║  ____________________________________________________________  ║
+║  ____________________________________________________________  ║
+║  Supporting data: _________________________________________   ║
+║                                                               ║
+╠═══════════════════════════════════════════════════════════════╣
+║                                                               ║
+║  TOP FINDING 3:                                               ║
+║                                                               ║
+║  ____________________________________________________________  ║
+║  ____________________________________________________________  ║
+║  Supporting data: _________________________________________   ║
+║                                                               ║
+╠═══════════════════════════════════════════════════════════════╣
+║                                                               ║
+║  CONTENT STRATEGY RECOMMENDATION:                             ║
+║                                                               ║
+║  The channel should make more content about _____________     ║
+║  because ________________________________________________     ║
+║  ____________________________________________________________  ║
+║                                                               ║
+╠═══════════════════════════════════════════════════════════════╣
+║                                                               ║
+║  POSTING STRATEGY RECOMMENDATION:                             ║
+║                                                               ║
+║  The channel should post on ________________ (day/s) at a    ║
+║  frequency of _____________ videos per week/month because    ║
+║  ____________________________________________________________  ║
+║                                                               ║
+╠═══════════════════════════════════════════════════════════════╣
+║                                                               ║
+║  GROWTH OPPORTUNITY:                                          ║
+║                                                               ║
+║  One thing this channel has NOT yet tried that the data      ║
+║  suggests could work: ___________________________________     ║
+║  ____________________________________________________________  ║
+║                                                               ║
+╠═══════════════════════════════════════════════════════════════╣
+║                                                               ║
+║  HONEST CAVEAT:                                               ║
+║                                                               ║
+║  One limitation of this analysis: _______________________    ║
+║  ____________________________________________________________  ║
+║  What additional data would make this more reliable: ____    ║
+║  ____________________________________________________________  ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
-## 🎨 My Chart Selection Cheat Sheet
+### Listening Notes: Other Students' Presentations
 
-Quick decision guide I created:
+*During the Q&A, note one insight from each presenter that you had not thought of:*
+
+**Presenter 1** (name: ___________________):
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+**Presenter 2** (name: ___________________):
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+**Presenter 3** (name: ___________________):
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+---
+
+### Instructor Follow-Up Questions
+
+*Be ready to answer any of these:*
+
+**Q: Your analysis shows X. What is your sample size for that finding?**
+
+My answer: ____________________________________________________________________
+
+**Q: If you could only recommend ONE change to the channel manager, what would it be?**
+
+My answer: ____________________________________________________________________
+
+________________________________________________________________________________
+
+**Q: What data do you NOT have that would make your recommendation more confident?**
+
+My answer: ____________________________________________________________________
+
+________________________________________________________________________________
+
+---
+
+## 📊 Revisit: The 5 Business Questions
+
+*Now that the day is done — answer each more fully:*
+
+**Q1: Which videos drive the most engagement?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+**Q2: Does video length affect performance?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+**Q3: What upload patterns correlate with higher views?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+**Q4: Which day of the week performs best?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+**Q5: What content strategy should the channel pursue going forward?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+---
+
+## 📋 End-of-Day Review
+
+### Today's Workflow — Can You Trace It?
+
+*Without looking at your notes, complete the workflow:*
 
 ```
-Showing trend over time? → ___________________
-
-Comparing categories? → ___________________
-
-Parts of a whole (%)? → ___________________
-
-Looking for correlation? → ___________________
-
-Best time to post? → ___________________
+Step 1: __________________________________ (10:20–11:00)
+   ↓
+Step 2: __________________________________ (11:00–11:40)
+   ↓
+Step 3: __________________________________ (11:40–12:00)
+   ↓
+[Lunch]
+   ↓
+Step 4: __________________________________ (1:30–2:15)
+   ↓
+Step 5: __________________________________ (2:15–3:00)
+   ↓
+Step 6: __________________________________ (3:15–4:00)
+   ↓
+Step 7: __________________________________ (4:00–4:30)
 ```
 
 ---
 
-## 💡 Key Insights I'll Remember
+### Three Roles You Played Today
 
-**3 most important things I learned today:**
-
-1. _________________________________________________________________
-   _________________________________________________________________
-
-2. _________________________________________________________________
-   _________________________________________________________________
-
-3. _________________________________________________________________
-   _________________________________________________________________
+| Time | Role | What You Did |
+|---|---|---|
+| Morning | Data Collector | |
+| Early Afternoon | | |
+| Late Afternoon | | |
 
 ---
 
-## ✅ Day 2 Completion
+### Key Takeaways
 
-- [ ] Attended all sessions
-- [ ] Completed all activities
-- [ ] Built working dashboard
-- [ ] Participated in team challenge
-- [ ] Ready for Day 3!
+**Three most important things I learned today:**
 
-**Signature:** _______________________ **Date:** _____________
+1. ___________________________________________________________________________
+
+   ____________________________________________________________________________
+
+2. ___________________________________________________________________________
+
+   ____________________________________________________________________________
+
+3. ___________________________________________________________________________
+
+   ____________________________________________________________________________
+
+**The most surprising finding from my data:**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+**One concept I want to learn more about:**
+
+________________________________________________________________________________
 
 ---
 
-**Great work on Day 2! You're now an analyst! 📊🎉**
+## 📝 Quick Self-Assessment Quiz
 
-**See you tomorrow for Day 3: Advanced Topics & Application!**
+**1. What does the YouTube Data API return data as?**
+
+________________________________________________________________________________
+
+**2. Why do we use `df_raw.copy()` before cleaning?**
+
+________________________________________________________________________________
+
+**3. A video has 80,000 views, 3,200 likes, and 400 comments. Calculate its engagement rate:**
+
+```
+Engagement Rate = ( _______ + _______ ) / _______ × 100 = _______  %
+```
+
+**4. Name one advantage of a scatter plot over a bar chart:**
+
+________________________________________________________________________________
+
+**5. In a correlation heatmap, what does a value of -0.72 indicate?**
+
+________________________________________________________________________________
+
+**6. What is the difference between descriptive and diagnostic analytics?**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+**7. Why should you always show sample size (n=) on a grouped bar chart?**
+
+________________________________________________________________________________
+
+**8. What does a right-skewed engagement distribution tell you about the channel?**
+
+________________________________________________________________________________
+
+**9. Name two interactive elements you can add to a Looker Studio dashboard:**
+
+1. _________________________________ 2. _________________________________
+
+**10. Complete this sentence: "A good executive brief leads with _______________, not _______________."**
+
+---
+
+## ✅ Submission Checklist
+
+Before you leave, confirm you have everything:
+
+- [ ] **Colab notebook** saved to Google Drive
+  - Share link (anyone with link → Viewer): ___________________________________
+- [ ] **CSV file** downloaded: `youtube_analytics_final.csv`
+- [ ] **Dashboard** built and share link copied:
+  - _____________________________________________________________
+- [ ] **Executive brief** written in this workbook (the box above)
+- [ ] **Self-assessment quiz** completed
+
+---
+
+## 🔢 Key Formulas Reference Card
+
+*Cut out or photograph this section for future reference:*
+
+```
+┌──────────────────────────────────────────────────────────┐
+│                  YOUTUBE ANALYTICS FORMULAS              │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  Engagement Rate = (Likes + Comments) / Views × 100     │
+│                                                          │
+│  Like Ratio      = Likes / Views × 100                  │
+│                                                          │
+│  Comment Ratio   = Comments / Views × 100               │
+│                                                          │
+│  Duration (min)  = Total Seconds / 60                   │
+│                                                          │
+├──────────────────────────────────────────────────────────┤
+│  CHART TYPE GUIDE                                        │
+│                                                          │
+│  Compare categories  → Horizontal bar chart             │
+│  Show trend over time → Line chart                      │
+│  Show relationship   → Scatter plot                     │
+│  Show distribution   → Histogram                        │
+│  Multiple metrics    → Dual-axis chart                  │
+├──────────────────────────────────────────────────────────┤
+│  GOOD ENGAGEMENT RATE BENCHMARKS (YouTube)              │
+│                                                          │
+│  Below 1%     = Low engagement                          │
+│  1% – 3.5%    = Average                                 │
+│  3.5% – 6%    = Good                                    │
+│  Above 6%     = Excellent                               │
+└──────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📚 Additional Notes & "Aha!" Moments
+
+*Use this space for anything you want to remember:*
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+---
+
+## 🎯 Connection to Day 3
+
+**What Day 3 builds on from today:**
+
+- Today you analyzed ONE channel. Day 3 applies the same skills to **competitive benchmarking** — comparing multiple channels.
+- Today you built recommendations. Day 3 teaches you how to **present** them to executives professionally.
+- Today you measured views and engagement. Day 3 connects those numbers to **business ROI**.
+
+**One question you're bringing into Day 3:**
+
+________________________________________________________________________________
+
+________________________________________________________________________________
+
+---
+
+## ✅ Before You Leave
+
+- [ ] Colab notebook saved to Drive
+- [ ] CSV downloaded
+- [ ] Dashboard link copied
+- [ ] Executive brief completed
+- [ ] Self-assessment quiz done
+- [ ] Workbook sections filled in throughout the day
+- [ ] Questions written down for instructor follow-up
+
+---
+
+**Outstanding work today! You collected, cleaned, analyzed, visualized, and reported on real YouTube data. That is the complete workflow of a professional data analyst. See you on Day 3! 📊**
+
+---
+
+**Instructor:** _________________________________________________________________
+
+**Email:** ______________________________________________________________________
+
+**Office Hours:** _______________________________________________________________
+
+---
+
+*Social Media Analytics Course — Day 2 © 2026*
+*Connect with Day 1: [day-01-foundations/student/workbook.md](../../day-01-foundations/student/workbook.md)*
+*Continue with Day 3: [day-03-application/student/workbook.md](../../day-03-application/student/workbook.md)*
